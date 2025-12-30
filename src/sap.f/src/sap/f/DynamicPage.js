@@ -318,9 +318,7 @@ sap.ui.define([
 			return vObject && ("length" in vObject) ? vObject.length > 0 : !!vObject;
 		}
 
-		return Array.prototype.slice.call(arguments).every(function (oObject) {
-			return exists(oObject);
-		});
+		return Array.prototype.slice.call(arguments).every(oObject => exists(oObject));
 	}
 
 	// Determines if DOM element has both width and height.
@@ -648,9 +646,7 @@ sap.ui.define([
 	 * @public
 	 * @returns {sap.ui.core.delegate.ScrollEnablement} The scroll delegate instance
 	 */
-	DynamicPage.prototype.getScrollDelegate = function () {
-		return this._oScrollHelper;
-	};
+	DynamicPage.prototype.getScrollDelegate = () => this._oScrollHelper;
 
 	/**
 	 * PRIVATE METHODS
@@ -1107,9 +1103,7 @@ sap.ui.define([
 	 * @returns {int}
 	 * @private
 	 */
-	DynamicPage.prototype._getScrollPosition = function () {
-		return exists(this.$wrapper) ? Math.ceil(this.$wrapper.scrollTop()) : 0;
-	};
+	DynamicPage.prototype._getScrollPosition = () => exists(this.$wrapper) ? Math.ceil(this.$wrapper.scrollTop()) : 0;
 
 	/**
 	 * Sets the value for aria-roledescription attribute
@@ -1129,9 +1123,7 @@ sap.ui.define([
 	 * @return {string} aria-roledescription
 	 * @private
 	 */
-	DynamicPage.prototype._getAriaRoleDescription = function () {
-		return this._sAriaRoleDescription;
-	};
+	DynamicPage.prototype._getAriaRoleDescription = () => this._sAriaRoleDescription;
 
 	/**
 	 * Updates the scroll position
@@ -1167,10 +1159,8 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._shouldSnapOnScroll = function () {
-		return !this._preserveHeaderStateOnScroll() && this._getScrollPosition() >= this._getSnappingHeight()
-			&& this.getHeaderExpanded() && !this._bPinned;
-	};
+	DynamicPage.prototype._shouldSnapOnScroll = () => !this._preserveHeaderStateOnScroll() && this._getScrollPosition() >= this._getSnappingHeight()
+        && this.getHeaderExpanded() && !this._bPinned;
 
 	/**
 	 * Determines if the header should expand on scroll.
@@ -1191,18 +1181,14 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._shouldStickStickyContent = function () {
-		return !this.getHeaderExpanded() || this._preserveHeaderStateOnScroll() || this._bHeaderInTitleArea;
-	};
+	DynamicPage.prototype._shouldStickStickyContent = () => !this.getHeaderExpanded() || this._preserveHeaderStateOnScroll() || this._bHeaderInTitleArea;
 
 	/**
 	 * Determines if the header is scrolled out completely.
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._headerScrolledOut = function () {
-		return this._getScrollPosition() >= this._getSnappingHeight();
-	};
+	DynamicPage.prototype._headerScrolledOut = () => this._getScrollPosition() >= this._getSnappingHeight();
 
 	/**
 	 * Determines if the header is allowed to collapse (snap),
@@ -1210,9 +1196,7 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._headerSnapAllowed = function () {
-		return !this._preserveHeaderStateOnScroll() && this.getHeaderExpanded() && !this._bPinned;
-	};
+	DynamicPage.prototype._headerSnapAllowed = () => !this._preserveHeaderStateOnScroll() && this.getHeaderExpanded() && !this._bPinned;
 
 	/**
 	 * Determines if it's possible for the header to collapse (snap) on scroll.
@@ -1220,9 +1204,7 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._canSnapHeaderOnScroll = function () {
-		return this._getMaxScrollPosition() > this._getSnappingHeight();
-	};
+	DynamicPage.prototype._canSnapHeaderOnScroll = () => this._getMaxScrollPosition() > this._getSnappingHeight();
 
 	/**
 	 * Determines the appropriate height at which the header can collapse (snap).
@@ -1275,35 +1257,22 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._needsVerticalScrollBar = function () {
-		return this._isContentOverflowingScrollContainer()
-			|| this.isContentOverflowingIntoFooter();
-	};
+	DynamicPage.prototype._needsVerticalScrollBar = () => this._isContentOverflowingScrollContainer()
+        || this.isContentOverflowingIntoFooter();
 
-	DynamicPage.prototype._isContentOverflowingScrollContainer = function () {
-		// treat maxScrollHeight values in the range [0, 1] as 0,
-		// to cover the known cases where the nested content overflows
-		// the container with up to 1px because of rounding issues
-		return Math.floor(this._getMaxScrollPosition()) > 1;
-	};
+	DynamicPage.prototype._isContentOverflowingScrollContainer = () => Math.floor(this._getMaxScrollPosition()) > 1;
 
-	DynamicPage.prototype._isContentOverflowingFullscreenContainer = function () {
-		return exists(this.$contentFitContainer)
-			&& this.$contentFitContainer[0].scrollHeight > this.$contentFitContainer[0].clientHeight;
-	};
+	DynamicPage.prototype._isContentOverflowingFullscreenContainer = () => exists(this.$contentFitContainer)
+        && this.$contentFitContainer[0].scrollHeight > this.$contentFitContainer[0].clientHeight;
 
-	DynamicPage.prototype.isContentOverflowingIntoFooter = function () {
-		return this.getShowFooter() && this._isContentOverflowingFullscreenContainer();
-	};
+	DynamicPage.prototype.isContentOverflowingIntoFooter = () => this.getShowFooter() && this._isContentOverflowingFullscreenContainer();
 
 	/**
 	 * Retrieves the height of the <code>DynamicPage</code> control.
 	 * @returns {number}
 	 * @private
 	 */
-	DynamicPage.prototype._getOwnHeight = function () {
-		return this._getHeight(this);
-	};
+	DynamicPage.prototype._getOwnHeight = () => this._getHeight(this);
 
 	/**
 	 * Determines the combined height of the title and the header.
@@ -1703,9 +1672,7 @@ sap.ui.define([
 	 * @param  {sap.ui.core.Control} oControl
 	 * @return {number} the width of the control
 	 */
-	DynamicPage.prototype._getWidth = function (oControl) {
-		return !(oControl instanceof Control) ? 0 : oControl.$().outerWidth() || 0;
-	};
+	DynamicPage.prototype._getWidth = oControl => !(oControl instanceof Control) ? 0 : oControl.$().outerWidth() || 0;
 
 	/**
 	 * Determines the height of the <code>DynamicPage</code> outer header DOM element (the title area),
@@ -1713,9 +1680,7 @@ sap.ui.define([
 	 * @returns {number}
 	 * @private
 	 */
-	DynamicPage.prototype._getTitleAreaHeight = function () {
-		return exists(this.$titleArea) ? this.$titleArea.outerHeight() || 0 : 0;
-	};
+	DynamicPage.prototype._getTitleAreaHeight = () => exists(this.$titleArea) ? this.$titleArea.outerHeight() || 0 : 0;
 
 	/**
 	 * Determines the width of the <code>DynamicPage</code> outer header DOM element (the title area),
@@ -1723,36 +1688,28 @@ sap.ui.define([
 	 * @returns {Number}
 	 * @private
 	 */
-	 DynamicPage.prototype._getTitleAreaWidth = function () {
-		return exists(this.$titleArea) ? this.$titleArea.width() || 0 : 0;
-	};
+	 DynamicPage.prototype._getTitleAreaWidth = () => exists(this.$titleArea) ? this.$titleArea.width() || 0 : 0;
 
 	/**
 	 * Determines the height of the <code>DynamicPageTitle</code> and if it's not present it returns 0.
 	 * @returns {number}
 	 * @private
 	 */
-	DynamicPage.prototype._getTitleHeight = function () {
-		return this._getHeight(this.getTitle());
-	};
+	DynamicPage.prototype._getTitleHeight = () => this._getHeight(this.getTitle());
 
 	/**
 	 * Determines the height of the <code>DynamicPageHeader</code> and if it's not present it returns 0.
 	 * @returns {number}
 	 * @private
 	 */
-	DynamicPage.prototype._getHeaderHeight = function () {
-		return this._getHeight(this.getHeader());
-	};
+	DynamicPage.prototype._getHeaderHeight = () => this._getHeight(this.getHeader());
 
 	/**
 	 * Determines if the presence of scroll (on the control itself) is allowed.
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPage.prototype._preserveHeaderStateOnScroll = function () {
-		return this.getPreserveHeaderStateOnScroll() && !this._headerBiggerThanAllowedHeight;
-	};
+	DynamicPage.prototype._preserveHeaderStateOnScroll = () => this.getPreserveHeaderStateOnScroll() && !this._headerBiggerThanAllowedHeight;
 
 	/**
 	 * Caches the <code>DynamicPage</code> DOM elements in a jQuery object for later reuse.

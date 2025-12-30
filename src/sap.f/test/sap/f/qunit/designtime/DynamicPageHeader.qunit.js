@@ -13,20 +13,16 @@ function (
 	"use strict";
 
 	return Promise.resolve()
-	.then(function () {
-		return elementDesigntimeTest({
-			type: "sap.f.DynamicPageHeader",
-			create: function () {
-				return new DynamicPageHeader({
-					content : [
-						new Text({text: "Header content 1"}),
-						new Text({text: "Header content 2"}),
-						new Text({text: "Header content 3"})
-					]
-				});
-			}
-		});
-	})
+	.then(() => elementDesigntimeTest({
+        type: "sap.f.DynamicPageHeader",
+        create: () => new DynamicPageHeader({
+            content : [
+                new Text({text: "Header content 1"}),
+                new Text({text: "Header content 2"}),
+                new Text({text: "Header content 3"})
+            ]
+        })
+    }))
 	.then(function() {
 		// ------------ HIDING THE CONTROL --------------
 		// Check if the remove action is working properly
@@ -52,11 +48,9 @@ function (
 			action : {
 				name : "remove",
 				controlId : "header",
-				parameter : function(oView){
-					return {
-						removedElement : oView.byId("header")
-					};
-				}
+				parameter : oView => ({
+                    removedElement : oView.byId("header")
+                })
 			},
 			afterAction : fnConfirmDynamicPageHeaderIsInvisible,
 			afterUndo : fnConfirmDynamicPageHeaderIsVisible,
@@ -120,23 +114,23 @@ function (
 			action : {
 				name : "move",
 				controlId : "header",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("text1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "content",
-							parent: oView.byId("header")
-						},
-						target : {
-							aggregation: "content",
-							parent: oView.byId("header")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("text1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "content",
+                        parent: oView.byId("header")
+                    },
+
+                    target : {
+                        aggregation: "content",
+                        parent: oView.byId("header")
+                    }
+                })
 			},
 			afterAction : fnConfirmHeaderlement1IsOn3rdPosition,
 			afterUndo : fnConfirmHeaderlement1IsOn1stPosition,

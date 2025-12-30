@@ -152,12 +152,8 @@ sap.ui.define([
 			});
 
 			this.oFakeSession = {
-				getDropControl: function() {
-					return oDropItem;
-				},
-				getDragControl: function() {
-					return oDragItem;
-				},
+				getDropControl: () => oDropItem,
+				getDragControl: () => oDragItem,
 				setIndicatorConfig: this.stub(),
 				setDropControl: this.stub(),
 				getDropPosition: this.stub(),

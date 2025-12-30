@@ -256,9 +256,7 @@ sap.ui.define([
 	 * @returns {string} The concatenated string to be displayed
 	 * @private
 	 */
-	CalendarInCard.prototype._formatMonthPickerText = function () {
-		return DateFormat.getDateInstance({format: "y"}).format(this.getStartDate());
-	};
+	CalendarInCard.prototype._formatMonthPickerText = () => DateFormat.getDateInstance({format: "y"}).format(this.getStartDate());
 
 	/**
 	 * Shows an embedded month picker.

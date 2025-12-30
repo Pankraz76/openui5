@@ -411,33 +411,21 @@ sap.ui.define([
 
 	};
 
-	FlexibleColumnLayoutSemanticHelper.prototype._getColumnsSizes = function (aSizes) {
+	FlexibleColumnLayoutSemanticHelper.prototype._getColumnsSizes = aSizes => ({
+        beginColumn: aSizes[0],
+        midColumn: aSizes[1],
+        endColumn: aSizes[2]
+    });
 
-		return {
-			beginColumn: aSizes[0],
-			midColumn: aSizes[1],
-			endColumn: aSizes[2]
-		};
-	};
+	FlexibleColumnLayoutSemanticHelper.prototype._getColumnsVisibility = aSizes => ({
+        beginColumn: aSizes[0] !== 0,
+        midColumn: aSizes[1] !== 0,
+        endColumn: aSizes[2] !== 0
+    });
 
-	FlexibleColumnLayoutSemanticHelper.prototype._getColumnsVisibility = function (aSizes) {
+	FlexibleColumnLayoutSemanticHelper.prototype._getIsFullScreen = aSizes => aSizes.indexOf(100) !== -1;
 
-		return {
-			beginColumn: aSizes[0] !== 0,
-			midColumn: aSizes[1] !== 0,
-			endColumn: aSizes[2] !== 0
-		};
-	};
-
-	FlexibleColumnLayoutSemanticHelper.prototype._getIsFullScreen = function (aSizes) {
-
-		return aSizes.indexOf(100) !== -1;
-	};
-
-	FlexibleColumnLayoutSemanticHelper.prototype._getIsLogicallyFullScreen = function (sLayout) {
-
-		return [LT.OneColumn, LT.MidColumnFullScreen, LT.EndColumnFullScreen].indexOf(sLayout) !== -1;
-	};
+	FlexibleColumnLayoutSemanticHelper.prototype._getIsLogicallyFullScreen = sLayout => [LT.OneColumn, LT.MidColumnFullScreen, LT.EndColumnFullScreen].indexOf(sLayout) !== -1;
 
 	FlexibleColumnLayoutSemanticHelper.prototype._getActionButtonsInfo = function (sColumnWidthDistribution, iMaxColumnsCount) {
 
@@ -522,13 +510,11 @@ sap.ui.define([
 	 * @public
 	 * @returns {object} The object describing the default layout types for the different numbers of columns
 	 */
-	FlexibleColumnLayoutSemanticHelper.prototype.getDefaultLayouts = function () {
-		return {
-			defaultLayoutType: this._defaultLayoutType,
-			defaultTwoColumnLayoutType: this._defaultTwoColumnLayoutType,
-			defaultThreeColumnLayoutType: this._defaultThreeColumnLayoutType
-		};
-	};
+	FlexibleColumnLayoutSemanticHelper.prototype.getDefaultLayouts = () => ({
+        defaultLayoutType: this._defaultLayoutType,
+        defaultTwoColumnLayoutType: this._defaultTwoColumnLayoutType,
+        defaultThreeColumnLayoutType: this._defaultThreeColumnLayoutType
+    });
 
 	/**
 	 * Determines whether the FCL can display 2 columns side by side.
@@ -553,9 +539,7 @@ sap.ui.define([
 	 * @since 1.72
 	 * @public
 	 */
-	FlexibleColumnLayoutSemanticHelper.prototype.isReady = function () {
-		return this.isDOMReady();
-	};
+	FlexibleColumnLayoutSemanticHelper.prototype.isReady = () => this.isDOMReady();
 
 	/**
 	 * Returns <code>true</code> if internal <code>FlexibleColumnLayout</code> reference is rendered in the DOM tree.
@@ -564,9 +548,7 @@ sap.ui.define([
 	 * @since 1.72
 	 * @public
 	 */
-	FlexibleColumnLayoutSemanticHelper.prototype.isDOMReady = function () {
-		return this._oFCL.getDomRef() !== null;
-	};
+	FlexibleColumnLayoutSemanticHelper.prototype.isDOMReady = () => this._oFCL.getDomRef() !== null;
 
 	/**
 	 * Returns promise which can be used to find out when internal criteria for this helper's

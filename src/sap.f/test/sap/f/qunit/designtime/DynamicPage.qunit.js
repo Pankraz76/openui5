@@ -22,28 +22,26 @@ function (
 
 	return elementDesigntimeTest({
 		type: "sap.f.DynamicPage",
-		create: function () {
-			return new DynamicPage({
-				showFooter : true,
-				title : new DynamicPageTitle({
-					heading : new Title({text: "Title text"}),
-					expandedContent : new Text({text: "Expanded subheading"}),
-					snappedContent : new Text({text: "Collapsed subheading"}),
-					actions : [
-						new Button({text: "Action1"}),
-						new Button({text: "Action2"})
-					]
-				}),
-				header : new DynamicPageHeader({
-						content : new Text({text: "Header content"})
-				}),
-				content : new Text({text: "Some sample content"}),
-				footer : new OverflowToolbar({
-					content : [
-						new Button({text: "Footer Button"})
-					]
-				})
-			});
-		}
+		create: () => new DynamicPage({
+            showFooter : true,
+            title : new DynamicPageTitle({
+                heading : new Title({text: "Title text"}),
+                expandedContent : new Text({text: "Expanded subheading"}),
+                snappedContent : new Text({text: "Collapsed subheading"}),
+                actions : [
+                    new Button({text: "Action1"}),
+                    new Button({text: "Action2"})
+                ]
+            }),
+            header : new DynamicPageHeader({
+                    content : new Text({text: "Header content"})
+            }),
+            content : new Text({text: "Some sample content"}),
+            footer : new OverflowToolbar({
+                content : [
+                    new Button({text: "Footer Button"})
+                ]
+            })
+        })
 	});
 });

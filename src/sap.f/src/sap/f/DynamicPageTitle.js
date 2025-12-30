@@ -359,9 +359,7 @@ sap.ui.define([
 			return vObject && ("length" in vObject) ? vObject.length > 0 : !!vObject;
 		}
 
-		return Array.prototype.slice.call(arguments).every(function (oObject) {
-			return exists(oObject);
-		});
+		return Array.prototype.slice.call(arguments).every(oObject => exists(oObject));
 	}
 
 	/* ========== STATIC MEMBERS  ========== */
@@ -384,9 +382,7 @@ sap.ui.define([
 	 * @returns {Object} the resource bundle object
 	 * @private
 	 */
-	DynamicPageTitle._getResourceBundle = function () {
-		return Library.getResourceBundleFor("sap.f");
-	};
+	DynamicPageTitle._getResourceBundle = () => Library.getResourceBundleFor("sap.f");
 
 	DynamicPageTitle.ARIA = {
 		TOOLBAR_HEADER_ACTIONS: DynamicPageTitle._getResourceBundle().getText("ARIA_LABEL_TOOLBAR_HEADER_ACTIONS")
@@ -438,9 +434,7 @@ sap.ui.define([
 		this._oInvisibleMessage = null;
 		this._aCachedInvisibleTexts = [];
 
-		this._fnActionSubstituteParentFunction = function () {
-			return this;
-		}.bind(this);
+		this._fnActionSubstituteParentFunction = (() => this).bind(this);
 
 		this._oObserver = new ManagedObjectObserver(DynamicPageTitle.prototype._observeChanges.bind(this));
 		this._oObserver.observe(this, {
@@ -772,9 +766,7 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPageTitle.prototype._actionExists = function (oAction, sAggregationName) {
-		return this.getMetadata().getAggregation(sAggregationName).get(this).indexOf(oAction) > -1;
-	};
+	DynamicPageTitle.prototype._actionExists = (oAction, sAggregationName) => this.getMetadata().getAggregation(sAggregationName).get(this).indexOf(oAction) > -1;
 
 	/**
 	 * Caches the DOM elements in a jQuery wrapper for later reuse.
@@ -1071,9 +1063,7 @@ sap.ui.define([
 		this._bNavigationActionsInTopArea = false;
 	};
 
-	DynamicPageTitle.prototype._areNavigationActionsInTopArea = function () {
-		return this._bNavigationActionsInTopArea;
-	};
+	DynamicPageTitle.prototype._areNavigationActionsInTopArea = () => this._bNavigationActionsInTopArea;
 
 	/**
 	 * Updates the <code>ToolbarSeparator</code> visibility.
@@ -1122,22 +1112,14 @@ sap.ui.define([
 	 * @returns {Array}
 	 * @private
 	 */
-	DynamicPageTitle.prototype._getVisibleActions = function() {
-		return this.getActions().filter(function(oAction){
-			return oAction.getVisible();
-		});
-	};
+	DynamicPageTitle.prototype._getVisibleActions = () => this.getActions().filter(oAction => oAction.getVisible());
 
 	/**
 	 * Returns an array of the visible <code>navigationActions</code>.
 	 * @returns {Array}
 	 * @private
 	 */
-	DynamicPageTitle.prototype._getVisibleNavigationActions = function() {
-		return this.getNavigationActions().filter(function(oAction){
-			return oAction.getVisible();
-		});
-	};
+	DynamicPageTitle.prototype._getVisibleNavigationActions = () => this.getNavigationActions().filter(oAction => oAction.getVisible());
 
 	/**
 	 * Sets flex-shrink CSS style to the Heading, Content and Actions areas
@@ -1288,9 +1270,7 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	DynamicPageTitle.prototype._getShowExpandButton = function () {
-		return this._bShowExpandButton;
-	};
+	DynamicPageTitle.prototype._getShowExpandButton = () => this._bShowExpandButton;
 
 	/**
 	 * Sets the private <code>bShowExpandButton</code> property.
@@ -1316,13 +1296,9 @@ sap.ui.define([
 	 * @returns {number}
 	 * @private
 	 */
-	DynamicPageTitle.prototype._getWidth = function () {
-		return this.$().outerWidth();
-	};
+	DynamicPageTitle.prototype._getWidth = () => this.$().outerWidth();
 
-	DynamicPageTitle.prototype.getFocusDomRef = function() {
-		return this._getFocusSpan()[0] || null;
-	};
+	DynamicPageTitle.prototype.getFocusDomRef = () => this._getFocusSpan()[0] || null;
 
 	/**
 	* Determines the <code>DynamicPageTitle</code> state.
@@ -1576,9 +1552,7 @@ sap.ui.define([
 		}
 	};
 
-	DynamicPageTitle.prototype._getFocusSpan = function () {
-		return this._$focusSpan;
-	};
+	DynamicPageTitle.prototype._getFocusSpan = () => this._$focusSpan;
 
 	DynamicPageTitle.prototype._addFocusClass = function () {
 		this.$().addClass("sapFDynamicPageTitleFocus");

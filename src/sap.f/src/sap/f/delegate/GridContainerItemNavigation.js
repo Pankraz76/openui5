@@ -44,9 +44,7 @@ sap.ui.define([
 		document.getElementById(sId).focus();
 	};
 
-	GridContainerItemNavigation.prototype._getRootDomRefId = function() {
-		return this.getRootDomRef().getAttribute("id");
-	};
+	GridContainerItemNavigation.prototype._getRootDomRefId = () => this.getRootDomRef().getAttribute("id");
 
 	/**
 	 * Forward tab to next focusable element inside GridContainer or out of it

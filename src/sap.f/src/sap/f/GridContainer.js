@@ -945,9 +945,7 @@ sap.ui.define([
 		this.fireEvent("borderReached", mParameters);
 	};
 
-	GridContainer.prototype._isListItem = function (oControl) {
-		return oControl.isA("sap.f.IGridContainerItem");
-	};
+	GridContainer.prototype._isListItem = oControl => oControl.isA("sap.f.IGridContainerItem");
 
 	/**
 	 * Handles moving of the items using the arrow keys. Calculates new position for the moved item.

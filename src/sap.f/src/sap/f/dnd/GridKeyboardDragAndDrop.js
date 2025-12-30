@@ -35,9 +35,7 @@ sap.ui.define([], function() {
 			 * @returns {sap.ui.core.Element|null}
 			 * @protected
 			 */
-			getDragControl: function() {
-				return oDraggedControl;
-			},
+			getDragControl: () => oDraggedControl,
 
 			/**
 			 * Returns the control over which we drop.
@@ -45,9 +43,7 @@ sap.ui.define([], function() {
 			 * @returns {sap.ui.core.Element|null}
 			 * @protected
 			 */
-			getDropControl: function() {
-				return oDroppedControl;
-			},
+			getDropControl: () => oDroppedControl,
 
 			/**
 			 * Returns the drop position - "Before" or "After"
@@ -55,9 +51,7 @@ sap.ui.define([], function() {
 			 * @returns {string}
 			 * @protected
 			 */
-			getDropPosition: function() {
-				return sDropPosition;
-			}
+			getDropPosition: () => sDropPosition
 		};
 	}
 
@@ -71,19 +65,14 @@ sap.ui.define([], function() {
 
 	function getValidDragInfos(oDragControl) {
 		var aDragDropConfigs = getDragDropConfigs(oDragControl);
-		return aDragDropConfigs.filter(function(oDragOrDropInfo) {
-			return oDragOrDropInfo.isDraggable(oDragControl);
-		});
+		return aDragDropConfigs.filter(oDragOrDropInfo => oDragOrDropInfo.isDraggable(oDragControl));
 	}
 
 	function getValidDropInfos(oDropControl, aDragInfos, oEvent) {
 		var aDragDropConfigs = getDragDropConfigs(oDropControl);
 		aDragInfos = aDragInfos || [];
 
-		return aDragDropConfigs.filter(function(oDragOrDropInfo) {
-			// DragDropInfo defined at the drop target is irrelevant we only need DropInfos
-			return !oDragOrDropInfo.isA("sap.ui.core.dnd.IDragInfo");
-		}).concat(aDragInfos).filter(function(oDropInfo) {
+		return aDragDropConfigs.filter(oDragOrDropInfo => !oDragOrDropInfo.isA("sap.ui.core.dnd.IDragInfo")).concat(aDragInfos).filter(function(oDropInfo) {
 			if (!oDropInfo.isDroppable(oDropControl, oEvent)) {
 				return false;
 			}
@@ -95,23 +84,13 @@ sap.ui.define([], function() {
 			}
 
 			// group name matching
-			return aDragInfos.some(function(oDragInfo) {
-				return oDragInfo.getGroupName() == sDropGroupName;
-			});
+			return aDragInfos.some(oDragInfo => oDragInfo.getGroupName() == sDropGroupName);
 		});
 	}
 
-	GridKeyboardDnD._filterDragInfos = function (aValidDragInfos, oEvent) {
-		return aValidDragInfos.filter(function(oDragInfo) {
-			return oDragInfo.fireDragStart(oEvent);
-		});
-	};
+	GridKeyboardDnD._filterDragInfos = (aValidDragInfos, oEvent) => aValidDragInfos.filter(oDragInfo => oDragInfo.fireDragStart(oEvent));
 
-	GridKeyboardDnD._filterDropInfos = function (aValidDropInfos, oEvent) {
-		return aValidDropInfos.filter(function(oDropInfo) {
-			return oDropInfo.fireDragEnter(oEvent);
-		});
-	};
+	GridKeyboardDnD._filterDropInfos = (aValidDropInfos, oEvent) => aValidDropInfos.filter(oDropInfo => oDropInfo.fireDragEnter(oEvent));
 
 	GridKeyboardDnD._fireDrop = function (aDropInfos, oEvent) {
 		aDropInfos.forEach(function (oDropInfo) {

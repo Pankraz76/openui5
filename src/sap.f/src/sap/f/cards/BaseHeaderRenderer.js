@@ -149,9 +149,7 @@ sap.ui.define(["sap/ui/core/library"], function (coreLibrary) {
 		}
 	};
 
-	BaseHeaderRenderer.hasNumericPart = function (oHeader) {
-		return false;
-	};
+	BaseHeaderRenderer.hasNumericPart = oHeader => false;
 
 	BaseHeaderRenderer.renderNumericPart = function (oRm, oHeader) { };
 

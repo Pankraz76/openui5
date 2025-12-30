@@ -38,9 +38,7 @@ sap.ui.define([
 	/**
 	 * @override
 	 */
-	SemanticToggleButton.prototype._getConfiguration = function () {
-		return SemanticConfiguration.getConfiguration(this.getMetadata().getName());
-	};
+	SemanticToggleButton.prototype._getConfiguration = () => SemanticConfiguration.getConfiguration(this.getMetadata().getName());
 
 	return SemanticToggleButton;
 });

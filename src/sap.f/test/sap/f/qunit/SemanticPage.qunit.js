@@ -818,9 +818,7 @@ function(
 		aTexts["action1"] = sButtonText;
 
 		var oMockResourceBundle = {
-			getText: function(sKey, aArgs, bIgnoreKeyFallback) {
-				return aTexts[sKey];
-			}
+			getText: (sKey, aArgs, bIgnoreKeyFallback) => aTexts[sKey]
 		};
 
 		var i18n = new ResourceModel({
@@ -848,9 +846,7 @@ function(
 		aTexts["action1"] = sButtonText;
 
 		var oMockResourceBundle = {
-			getText: function(sKey, aArgs, bIgnoreKeyFallback) {
-				return aTexts[sKey];
-			}
+			getText: (sKey, aArgs, bIgnoreKeyFallback) => aTexts[sKey]
 		};
 
 		var i18n = new ResourceModel({

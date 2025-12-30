@@ -39,9 +39,7 @@ sap.ui.define([
 	/**
 	 * @override
 	 */
-	SemanticButton.prototype._getConfiguration = function () {
-		return SemanticConfiguration.getConfiguration(this.getMetadata().getName());
-	};
+	SemanticButton.prototype._getConfiguration = () => SemanticConfiguration.getConfiguration(this.getMetadata().getName());
 
 	return SemanticButton;
 });

@@ -772,9 +772,7 @@ function (
 			mMode = {initial: "initial", menu: "menu"},
 			oSpy = this.spy(this.oSemanticShareMenu, "_fireContentChanged");
 
-		oSaveAsTileAction._getType = function() {
-			return sSaveAsTileActionType;
-		};
+		oSaveAsTileAction._getType = () => sSaveAsTileActionType;
 
 		// Assert
 		assert.equal(this.oSemanticShareMenu._getMode(), mMode.initial,

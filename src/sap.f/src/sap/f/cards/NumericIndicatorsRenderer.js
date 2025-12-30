@@ -17,9 +17,7 @@ sap.ui.define([], function () {
 	NumericIndicatorsRenderer.render = function (oRm, oNumericIndicators) {
 		var oMainIndicator = oNumericIndicators.getAggregation("_mainIndicator"),
 			oSideIndicators = oNumericIndicators.getSideIndicators(),
-			bHasVisibleSideIndicator = oSideIndicators.some(function (oIndicator) {
-				return oIndicator.getVisible();
-			});
+			bHasVisibleSideIndicator = oSideIndicators.some(oIndicator => oIndicator.getVisible());
 
 		oRm.openStart("div", oNumericIndicators)
 			.class("sapFCardNumericIndicators")

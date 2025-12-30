@@ -122,25 +122,19 @@ sap.ui.define([
 	 * Gets the column size, converted to its 'px' value.
 	 * @returns {int} The 'px' value. NaN if 'px' value can not be calculated.
 	 */
-	GridContainerSettings.prototype.getColumnSizeInPx = function () {
-		return cssSizeToPx(this.getColumnSize());
-	};
+	GridContainerSettings.prototype.getColumnSizeInPx = () => cssSizeToPx(this.getColumnSize());
 
 	/**
 	 * Gets the row size, converted to its 'px' value.
 	 * @returns {int} The 'px' value. NaN if 'px' value can not be calculated.
 	 */
-	GridContainerSettings.prototype.getRowSizeInPx = function () {
-		return cssSizeToPx(this.getRowSize());
-	};
+	GridContainerSettings.prototype.getRowSizeInPx = () => cssSizeToPx(this.getRowSize());
 
 	/**
 	 * Gets the gap size, converted to its 'px' value.
 	 * @returns {int} The 'px' value. NaN if 'px' value can not be calculated.
 	 */
-	GridContainerSettings.prototype.getGapInPx = function () {
-		return cssSizeToPx(this.getGap());
-	};
+	GridContainerSettings.prototype.getGapInPx = () => cssSizeToPx(this.getGap());
 
 	/**
 	 * Calculates how many columns the grid should have, based on gap size and column size.

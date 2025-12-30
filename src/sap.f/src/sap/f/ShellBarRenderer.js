@@ -73,9 +73,7 @@ function() {
 			}
 			oRm.close("div");
 		},
-		shouldAddIBarContext: function () {
-			return false;
-		}
+		shouldAddIBarContext: () => false
 	};
 
 }, /* bExport= */ true);

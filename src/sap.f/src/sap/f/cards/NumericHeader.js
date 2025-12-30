@@ -351,9 +351,7 @@ sap.ui.define([
 	 * @protected
 	 * @returns {boolean} If the icon should be shown.
 	 */
-	NumericHeader.prototype.shouldShowIcon = function () {
-		return this.getIconVisible();
-	};
+	NumericHeader.prototype.shouldShowIcon = () => this.getIconVisible();
 
 	/**
 	 * This method is a hook for the RenderManager that gets called
@@ -375,9 +373,7 @@ sap.ui.define([
 	/**
 	 * @override
 	 */
-	NumericHeader.prototype.getTitleId = function () {
-		return this._getTitle().getId();
-	};
+	NumericHeader.prototype.getTitleId = () => this._getTitle().getId();
 
 	/**
 	 * Lazily create a title and return it.
@@ -479,9 +475,7 @@ sap.ui.define([
 	 * @private
 	 * @return {string} The id for details control.
 	 */
-	NumericHeader.prototype._getDetailsId = function () {
-		return this.getId() + "-details";
-	};
+	NumericHeader.prototype._getDetailsId = () => this.getId() + "-details";
 
 	/**
 	 * Lazily create numeric content and return it.
@@ -558,15 +552,11 @@ sap.ui.define([
 	 * @private
 	 * @returns {string} IDs of controls
 	 */
-	NumericHeader.prototype._getSideIndicatorIds = function () {
-		return this.getSideIndicators()
-			.map(function(oSideIndicator) { return oSideIndicator.getId(); })
-			.join(" ");
-	};
+	NumericHeader.prototype._getSideIndicatorIds = () => this.getSideIndicators()
+        .map(oSideIndicator => oSideIndicator.getId())
+        .join(" ");
 
-	NumericHeader.prototype.isLoading = function () {
-		return false;
-	};
+	NumericHeader.prototype.isLoading = () => false;
 
 	NumericHeader.prototype.attachPress = function () {
 		var aMyArgs = Array.prototype.slice.apply(arguments);

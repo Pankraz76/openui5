@@ -15,19 +15,15 @@ sap.ui.define([
 	"use strict";
 
 	return {
-		getLabel: function (sText, sLabelFor) {
-			return new Label({
-				wrapping: true,
-				text: sText,
-				labelFor: sLabelFor
-			});
-		},
-		getSelectItem: function (iNumber) {
-			return new Item({
-				text: "Content " + ++iNumber,
-				key: iNumber
-			});
-		},
+		getLabel: (sText, sLabelFor) => new Label({
+            wrapping: true,
+            text: sText,
+            labelFor: sLabelFor
+        }),
+		getSelectItem: iNumber => new Item({
+            text: "Content " + ++iNumber,
+            key: iNumber
+        }),
 		getSelect: function (iCount) {
 			var aSelectItems = [];
 
@@ -55,72 +51,62 @@ sap.ui.define([
 
 			return aLabelCombos;
 		},
-		getHeader: function () {
-			return new DynamicPageHeader({
-				pinnable: true,
-				content: [
-					new Grid({
-						content: this.getLabelWithSelectCombo(6),
-						defaultSpan: "XL2 L3 M4 S6"
-					})
-				]
-			});
-		},
-		getTitle: function(oToggleFooterButton) {
-			return new DynamicPageTitle({
-				heading: [new Title({text: "Some title", level: "H1", titleStyle: "H2", wrapping: true})],
-				snappedContent: [this.getLabel("Filtered 1042 items based on 'unknown' criteria")],
-				actions: [
-					new ToolbarSpacer(),
-					oToggleFooterButton,
-					new Button({
-						icon: "sap-icon://add",
-						tooltip: "add"
-					}),
-					new Button({
-						icon: "sap-icon://edit",
-						tooltip: "edit"
-					}),
-					new Button({
-						icon: "sap-icon://delete",
-						tooltip: "delete"
-					})
-				]
-			});
-		},
-		getFooter: function() {
-			return new OverflowToolbar({
-				content: [
-					new ToolbarSpacer(),
-					new Button({
-						text: "Accept",
-						type: "Accept"
-					}),
-					new Button({
-						text: "Reject",
-						type: "Reject"
-					})
-				]
-			});
-		},
-		getDynamicPage: function(bPreserveHeader, oTitle, oHeader, oContent, oFooter) {
-			return new DynamicPage({
-				preserveHeaderStateOnScroll: bPreserveHeader,
-				title: oTitle,
-				header: oHeader,
-				content: oContent,
-				footer: oFooter
-			});
-		},
-		getDynamicPageWithStickyHeader: function(bPreserveHeader, oTitle, oHeader, oContent, oFooter, oStickyHeaderProvider) {
-			return new DynamicPage({
-				preserveHeaderStateOnScroll: bPreserveHeader,
-				stickySubheaderProvider: oStickyHeaderProvider.getId(),
-				title: oTitle,
-				header: oHeader,
-				content: oContent,
-				footer: oFooter
-			});
-		}
+		getHeader: () => new DynamicPageHeader({
+            pinnable: true,
+            content: [
+                new Grid({
+                    content: this.getLabelWithSelectCombo(6),
+                    defaultSpan: "XL2 L3 M4 S6"
+                })
+            ]
+        }),
+		getTitle: oToggleFooterButton => new DynamicPageTitle({
+            heading: [new Title({text: "Some title", level: "H1", titleStyle: "H2", wrapping: true})],
+            snappedContent: [this.getLabel("Filtered 1042 items based on 'unknown' criteria")],
+            actions: [
+                new ToolbarSpacer(),
+                oToggleFooterButton,
+                new Button({
+                    icon: "sap-icon://add",
+                    tooltip: "add"
+                }),
+                new Button({
+                    icon: "sap-icon://edit",
+                    tooltip: "edit"
+                }),
+                new Button({
+                    icon: "sap-icon://delete",
+                    tooltip: "delete"
+                })
+            ]
+        }),
+		getFooter: () => new OverflowToolbar({
+            content: [
+                new ToolbarSpacer(),
+                new Button({
+                    text: "Accept",
+                    type: "Accept"
+                }),
+                new Button({
+                    text: "Reject",
+                    type: "Reject"
+                })
+            ]
+        }),
+		getDynamicPage: (bPreserveHeader, oTitle, oHeader, oContent, oFooter) => new DynamicPage({
+            preserveHeaderStateOnScroll: bPreserveHeader,
+            title: oTitle,
+            header: oHeader,
+            content: oContent,
+            footer: oFooter
+        }),
+		getDynamicPageWithStickyHeader: (bPreserveHeader, oTitle, oHeader, oContent, oFooter, oStickyHeaderProvider) => new DynamicPage({
+            preserveHeaderStateOnScroll: bPreserveHeader,
+            stickySubheaderProvider: oStickyHeaderProvider.getId(),
+            title: oTitle,
+            header: oHeader,
+            content: oContent,
+            footer: oFooter
+        })
 	};
 });

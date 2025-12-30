@@ -1946,11 +1946,7 @@ function(
 		var oInvisibleItem = this.oGrid.getItems()[0].setVisible(false),
 			oItemWrapper = GridContainerUtils.getItemWrapper(oInvisibleItem),
 			aMatrix = this.oGrid.getNavigationMatrix(),
-			bExists = aMatrix.some(function (aRow) {
-				return aRow.some(function (oItemAtColumn) {
-					return oItemAtColumn === oItemWrapper;
-				});
-			});
+			bExists = aMatrix.some(aRow => aRow.some(oItemAtColumn => oItemAtColumn === oItemWrapper));
 
 		// Assert
 		assert.strictEqual(bExists, false, "Created matrix does not include the invisible item");

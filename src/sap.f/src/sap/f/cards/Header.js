@@ -296,9 +296,7 @@ sap.ui.define([
 	 * @protected
 	 * @returns {boolean} If the icon should be shown.
 	 */
-	Header.prototype.shouldShowIcon = function () {
-		return this.getIconVisible();
-	};
+	Header.prototype.shouldShowIcon = () => this.getIconVisible();
 
 	/**
 	 * This method is a hook for the RenderManager that gets called
@@ -358,13 +356,9 @@ sap.ui.define([
 	/**
 	 * @override
 	 */
-	Header.prototype.getTitleId = function () {
-		return this._getTitle().getId();
-	};
+	Header.prototype.getTitleId = () => this._getTitle().getId();
 
-	Header.prototype.isLoading = function () {
-		return false;
-	};
+	Header.prototype.isLoading = () => false;
 
 	Header.prototype.attachPress = function () {
 		var aMyArgs = Array.prototype.slice.apply(arguments);

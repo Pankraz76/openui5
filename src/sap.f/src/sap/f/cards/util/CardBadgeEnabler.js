@@ -107,9 +107,7 @@ function(CardBadgeCustomData, BadgeCustomData, ObjectStatus, InvisibleText, Lib,
 		 * @returns {Array} aCardBadgeCustomData
 		 */
 		this._getCardBadgeCustomData  = function () {
-			const aCardBadgeCustomData = this.getCustomData().filter(function(item) {
-				return this._isBadgeCustomData(item);
-			}.bind(this));
+			const aCardBadgeCustomData = this.getCustomData().filter((item => this._isBadgeCustomData(item)).bind(this));
 
 			return aCardBadgeCustomData;
 		};
@@ -118,9 +116,7 @@ function(CardBadgeCustomData, BadgeCustomData, ObjectStatus, InvisibleText, Lib,
 		 * Returns badges added to the aggregation of card "_cardBadges"
 		 * @returns {Array} Cards _cardBadges aggregation
 		 */
-		this._getCardBadges  = function () {
-			return this.getAggregation("_cardBadges");
-		};
+		this._getCardBadges  = () => this.getAggregation("_cardBadges");
 
 		/**
 		 * Gets badge corresponding to the <code>sap.f.cards.CardBadgeCustomData</code>
@@ -200,9 +196,7 @@ function(CardBadgeCustomData, BadgeCustomData, ObjectStatus, InvisibleText, Lib,
 			return this;
 		};
 
-		this._isBadgeCustomData = function (oData) {
-			return oData instanceof CardBadgeCustomData || oData instanceof BadgeCustomData;
-		};
+		this._isBadgeCustomData = oData => oData instanceof CardBadgeCustomData || oData instanceof BadgeCustomData;
 
 		/* =========================================================== */
 		/*           begin: functions needed to support BadgeCustomData */
@@ -220,7 +214,7 @@ function(CardBadgeCustomData, BadgeCustomData, ObjectStatus, InvisibleText, Lib,
 		};
 
 		this.getBadgeCustomData = function () {
-			var oBadgeCustomData = this.getCustomData().filter(function(item) {return item instanceof BadgeCustomData;});
+			var oBadgeCustomData = this.getCustomData().filter(item => item instanceof BadgeCustomData);
 			return oBadgeCustomData.length ? oBadgeCustomData[0] : undefined;
 		};
 

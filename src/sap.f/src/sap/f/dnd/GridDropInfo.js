@@ -277,9 +277,7 @@ sap.ui.define([
 	 * @param {jQuery.Event} oEvent The event which has triggered drag and drop.
 	 * @returns {boolean} True if it is triggered by keyboard. False if triggered by mouse.
 	 */
-	GridDropInfo.prototype._isKeyboardEvent = function(oEvent) {
-		return oEvent.originalEvent.type === "keydown";
-	};
+	GridDropInfo.prototype._isKeyboardEvent = oEvent => oEvent.originalEvent.type === "keydown";
 
 	/**
 	 * Suggests a drop position for the given drag event.

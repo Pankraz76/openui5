@@ -5,9 +5,7 @@ sap.ui.define(["sap/f/ProductSwitchItem", "sap/ui/qunit/utils/nextUIUpdate"],
 
 		var TESTS_DOM_CONTAINER = "qunit-fixture",
 			oUtil = {
-				getProductSwitchItem: function () {
-					return new ProductSwitchItem();
-				}
+				getProductSwitchItem: () => new ProductSwitchItem()
 			};
 
 		QUnit.module("ProductSwitchItem - API ", {

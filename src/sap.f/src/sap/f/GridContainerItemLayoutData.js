@@ -60,9 +60,7 @@ sap.ui.define(['sap/ui/core/LayoutData'],
 		 * @returns {boolean} True if the item has auto height
 		 * @private
 		 */
-		GridContainerItemLayoutData.prototype.hasAutoHeight = function () {
-			return !this.getRows();
-		};
+		GridContainerItemLayoutData.prototype.hasAutoHeight = () => !this.getRows();
 
 		/**
 		 * Returns the actual number of rows.
@@ -70,9 +68,7 @@ sap.ui.define(['sap/ui/core/LayoutData'],
 		 * @returns {int} The actual number of rows
 		 * @private
 		 */
-		GridContainerItemLayoutData.prototype.getActualRows = function () {
-			return Math.max(this.getRows() || 1, this.getMinRows() || 1);
-		};
+		GridContainerItemLayoutData.prototype.getActualRows = () => Math.max(this.getRows() || 1, this.getMinRows() || 1);
 
 		return GridContainerItemLayoutData;
 	});

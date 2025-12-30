@@ -374,17 +374,11 @@ sap.ui.define(['sap/ui/core/routing/Targets', './TargetHandler', './Target'],
 			 * @return {sap.f.routing.TargetHandler} The <code>TargetHandler</code> instance
 			 * @public
 			 */
-			getTargetHandler : function () {
-				return this._oTargetHandler;
-			},
+			getTargetHandler : () => this._oTargetHandler,
 
-			_constructTarget : function (oOptions, oParent) {
-				return new Target(oOptions, this.getViews(), oParent, this._oTargetHandler);
-			},
+			_constructTarget : (oOptions, oParent) => new Target(oOptions, this.getViews(), oParent, this._oTargetHandler),
 
-			_getDeprecatedOptions : function() {
-				return Object.assign(Targets.prototype._getDeprecatedOptions.apply(this), {"viewLevel": "level"});
-			},
+			_getDeprecatedOptions : () => Object.assign(Targets.prototype._getDeprecatedOptions.apply(this), {"viewLevel": "level"}),
 
 			/**
 			 * Traverse up from the given target through the parent chain to find out the first target with a defined view level.

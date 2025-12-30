@@ -104,13 +104,9 @@ sap.ui.define([
 		return this;
 	};
 
-	SemanticShareMenu.prototype.getCustomActions = function() {
-		return this._aCustomShareActions.slice();
-	};
+	SemanticShareMenu.prototype.getCustomActions = () => this._aCustomShareActions.slice();
 
-	SemanticShareMenu.prototype.indexOfCustomAction = function(oCustomControl) {
-		return this._aCustomShareActions.indexOf(oCustomControl);
-	};
+	SemanticShareMenu.prototype.indexOfCustomAction = oCustomControl => this._aCustomShareActions.indexOf(oCustomControl);
 
 	SemanticShareMenu.prototype.removeCustomAction = function(oCustomControl) {
 		var vResult = this._callContainerAggregationMethod("removeButton", oCustomControl);
@@ -223,9 +219,7 @@ sap.ui.define([
 	*
 	* @returns {string}
 	*/
-	SemanticShareMenu.prototype._getMode = function() {
-		return this._mode;
-	};
+	SemanticShareMenu.prototype._getMode = () => this._mode;
 
 
 	/*
@@ -275,11 +269,7 @@ sap.ui.define([
 
 	SemanticShareMenu.prototype._getVisibleActions = function () {
 		var aAllActions = this._aShareMenuActions.concat(this._aCustomShareActions),
-			aVisibleActions = aAllActions.map(function (oAction) {
-				return this._getControl(oAction);
-			}, this).filter(function (oButton) {
-				return oButton.getVisible();
-			});
+			aVisibleActions = aAllActions.map(oAction => this._getControl(oAction), this).filter(oButton => oButton.getVisible());
 
 		return aVisibleActions;
 	};
@@ -421,13 +411,9 @@ sap.ui.define([
 		}
 	};
 
-	SemanticShareMenu.prototype._isInitialMode = function() {
-		return this._getMode() === SemanticShareMenu._Mode.initial;
-	};
+	SemanticShareMenu.prototype._isInitialMode = () => this._getMode() === SemanticShareMenu._Mode.initial;
 
-	SemanticShareMenu.prototype._isMenuMode = function() {
-		return this._getMode() === SemanticShareMenu._Mode.menu;
-	};
+	SemanticShareMenu.prototype._isMenuMode = () => this._getMode() === SemanticShareMenu._Mode.menu;
 
 	return SemanticShareMenu;
 

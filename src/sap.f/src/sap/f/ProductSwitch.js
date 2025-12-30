@@ -246,9 +246,7 @@ sap.ui.define([
 			return aDestroyedItems;
 		};
 
-		ProductSwitch.prototype._getItemsCount = function () {
-			return this.getItems().length;
-		};
+		ProductSwitch.prototype._getItemsCount = () => this.getItems().length;
 
 		ProductSwitch.prototype._getItemPosition = function (oItem) {
 			var aItems = this.getItems(),

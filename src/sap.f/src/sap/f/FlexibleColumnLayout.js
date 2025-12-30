@@ -902,27 +902,21 @@ sap.ui.define([
 	 * @returns {*}
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._getBeginColumn = function () {
-		return this.getAggregation("_beginColumnNav");
-	};
+	FlexibleColumnLayout.prototype._getBeginColumn = () => this.getAggregation("_beginColumnNav");
 
 	/**
 	 * Getter for the Mid column nav container
 	 * @returns {*}
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._getMidColumn = function () {
-		return this.getAggregation("_midColumnNav");
-	};
+	FlexibleColumnLayout.prototype._getMidColumn = () => this.getAggregation("_midColumnNav");
 
 	/**
 	 * Getter for the End column nav container
 	 * @returns {*}
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._getEndColumn = function () {
-		return this.getAggregation("_endColumnNav");
-	};
+	FlexibleColumnLayout.prototype._getEndColumn = () => this.getAggregation("_endColumnNav");
 
 	/**
 	 * Updates the content of a column by flushing its container div only
@@ -1156,9 +1150,7 @@ sap.ui.define([
 	 * @returns {boolean} whether or not the focus is in the current column
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._isFocusInCurrentColumn = function (oCurrentColumn) {
-		return oCurrentColumn._isFocusInControl(oCurrentColumn);
-	};
+	FlexibleColumnLayout.prototype._isFocusInCurrentColumn = oCurrentColumn => oCurrentColumn._isFocusInControl(oCurrentColumn);
 
 	FlexibleColumnLayout.prototype._getControlWidth = function () {
 		// There is a case when we are still in app initialization phase and some containers
@@ -1222,9 +1214,7 @@ sap.ui.define([
 	 * @return {Array.<object>}
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._getNavContainers = function () {
-		return [this._getBeginColumn(), this._getMidColumn(), this._getEndColumn()];
-	};
+	FlexibleColumnLayout.prototype._getNavContainers = () => [this._getBeginColumn(), this._getMidColumn(), this._getEndColumn()];
 
 	/**
 	 * Saves the DOM references of the columns and column separators.
@@ -1261,9 +1251,7 @@ sap.ui.define([
 	 * @returns {number} the count
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._getVisibleColumnsCount = function (sLayout) {
-		return this._getVisibleColumnsForLayout(sLayout).length;
-	};
+	FlexibleColumnLayout.prototype._getVisibleColumnsCount = sLayout => this._getVisibleColumnsForLayout(sLayout).length;
 
 	/**
 	 * Returns the names of columns that have width > 0
@@ -1271,12 +1259,7 @@ sap.ui.define([
 	 * @returns {Array.<string>} the column names
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._getVisibleColumnsForLayout = function (sLayout) {
-		return FlexibleColumnLayout.COLUMN_ORDER.filter(function (sColumn) {
-			// Different than 0, as when we are storing the begin column size, it may happen that it's too big, leading to a negative size of the mid column
-			return this._getColumnSizeForLayout(sColumn, sLayout) !== 0;
-		}, this);
-	};
+	FlexibleColumnLayout.prototype._getVisibleColumnsForLayout = sLayout => FlexibleColumnLayout.COLUMN_ORDER.filter(sColumn => this._getColumnSizeForLayout(sColumn, sLayout) !== 0, this);
 
 	/**
 	 * Returns the number of columns that have width > 0.
@@ -1288,9 +1271,7 @@ sap.ui.define([
 			return 0;
 		}
 
-		return Object.keys(this._oColumnSeparators).filter(function (sName) {
-			return this._oColumnSeparators[sName].data("visible");
-		}, this).length;
+		return Object.keys(this._oColumnSeparators).filter(sName => this._oColumnSeparators[sName].data("visible"), this).length;
 	};
 
 	/**
@@ -1610,16 +1591,12 @@ sap.ui.define([
 		};
 	};
 
-	FlexibleColumnLayout.prototype._getPreviousLayout = function () {
-		return this._getLayoutHistory().getEntry(1, true /* recent first */) || LT.OneColumn;
-	};
+	FlexibleColumnLayout.prototype._getPreviousLayout = () => this._getLayoutHistory().getEntry(1, true /* recent first */) || LT.OneColumn;
 
 	FlexibleColumnLayout.prototype._addDetailedActiveClasses = function (sLayout) {
 		var aColumns = FlexibleColumnLayout.COLUMN_ORDER.slice(),
 			bRtl = Localization.getRTL(),
-			aActiveColumns = aColumns.filter(function (sColumn) {
-				return this._getColumnSizeForLayout(sColumn, sLayout) > 0;
-			}, this);
+			aActiveColumns = aColumns.filter(sColumn => this._getColumnSizeForLayout(sColumn, sLayout) > 0, this);
 
 		if (bRtl) {
 			aColumns.reverse();
@@ -1873,10 +1850,8 @@ sap.ui.define([
 				oNewColumnWidths.mid += iOffsetOnSeparatorsCountChange;
 			}
 
-			bResizeWithPinning = FlexibleColumnLayout.COLUMN_ORDER.some(function(sColumnName) {
-				return this._shouldRevealColumn(sColumnName, sLayout, sPreviousLayout)
-					|| this._shouldConcealColumn(sColumnName, sLayout, sPreviousLayout);
-			}, this);
+			bResizeWithPinning = FlexibleColumnLayout.COLUMN_ORDER.some(sColumnName => this._shouldRevealColumn(sColumnName, sLayout, sPreviousLayout)
+                || this._shouldConcealColumn(sColumnName, sLayout, sPreviousLayout), this);
 
 			oNewColumnWidths = this._mergeColumnWidthsOnInteractiveLayoutChange({
 				oldWidths: this._getAllColumnSizesForLayout(sLayout, true),
@@ -1946,9 +1921,7 @@ sap.ui.define([
 			sColumnEnlargedByDragging = oOptions.columnEnlargedByDragging,
 			aResizedColumnNames = Object.keys(oNewWidths),
 			iAvailableWidth = this._getTotalColumnsWidth(sLayout),
-			isFullyVisible = function(sColumn) {
-				return oNewWidths[sColumn] >= FlexibleColumnLayout.COLUMN_MIN_WIDTH;
-			},
+			isFullyVisible = sColumn => oNewWidths[sColumn] >= FlexibleColumnLayout.COLUMN_MIN_WIDTH,
 			autosizeMid = function(oColumnWidths) {
 				// the mid column takes the remaining space after begin and end are sized
 				oColumnWidths.mid = iAvailableWidth - oColumnWidths.begin - oColumnWidths.end;
@@ -2021,9 +1994,7 @@ sap.ui.define([
 
 		function getSiblingColumn(sColumn) {
 			if (iVisibleColumnsCount === 2) {
-				return aVisibleColumns.find(function(sNextColumn) {
-					return sNextColumn !== sColumn;
-				});
+				return aVisibleColumns.find(sNextColumn => sNextColumn !== sColumn);
 			}
 			// all three columns are visible
 			if (["begin", "end"].indexOf(sColumn) > -1) {
@@ -2081,9 +2052,7 @@ sap.ui.define([
 		}
 
 		var iAvailableWidth = this._getTotalColumnsWidth(sLayout),
-			fnConvert = function(vPx) {
-				return vPx / iAvailableWidth * 100;
-			};
+			fnConvert = vPx => vPx / iAvailableWidth * 100;
 
 		if (typeof vPx === "number") {
 			return fnConvert(vPx);
@@ -2104,22 +2073,16 @@ sap.ui.define([
 
 	FlexibleColumnLayout.prototype._isValidWidthDistributionForLayout = function(sNewWidthsDistribution, sLayout) {
 		var aPercentWidths = sNewWidthsDistribution.split("/").map((x) => parseFloat(x)),
-			iSum = aPercentWidths.reduce(function(i, sum) {
-				return parseFloat(i) + sum;
-			}),
+			iSum = aPercentWidths.reduce((i, sum) => parseFloat(i) + sum),
 			aPxWidths;
 
 		if (Math.round(iSum) !== 100) {
 			return false;
 		}
 
-		aPxWidths = aPercentWidths.map(function(iPercentWidth) {
-			return this._convertColumnPercentWidthToPx(iPercentWidth, sLayout);
-		}, this);
+		aPxWidths = aPercentWidths.map(iPercentWidth => this._convertColumnPercentWidthToPx(iPercentWidth, sLayout), this);
 
-		if (aPxWidths.some(function(iPxWidth) {
-			return (iPxWidth > 0) && (iPxWidth < FlexibleColumnLayout.COLUMN_MIN_WIDTH);
-		})) {
+		if (aPxWidths.some(iPxWidth => (iPxWidth > 0) && (iPxWidth < FlexibleColumnLayout.COLUMN_MIN_WIDTH))) {
 			return false;
 		}
 
@@ -2268,29 +2231,17 @@ sap.ui.define([
 			iBeginWidth = oColumnWidths.begin,
 			iBeginPercentWidth = Math.ceil(this._convertColumnPxWidthToPercent(iBeginWidth, sLayout)),
 			oLayoutMatchers =  {
-				[LT.TwoColumnsBeginExpanded]: function() {
-					return oColumnWidths.begin >= oColumnWidths.mid;
-				},
-				[LT.TwoColumnsMidExpanded]: function() {
-					return oColumnWidths.mid > oColumnWidths.begin;
-				},
-				[LT.ThreeColumnsEndExpanded]: function() {
-					return (oColumnWidths.end > oColumnWidths.mid) && (iBeginPercentWidth < 33);
-				},
-				[LT.ThreeColumnsBeginExpandedEndHidden]: function() {
-					return (oColumnWidths.begin >= oColumnWidths.mid) && oColumnWidths.end === 0;
-				},
-				[LT.ThreeColumnsMidExpanded]: function() {
-					return (oColumnWidths.mid >= oColumnWidths.end) &&
-					(((iMaxColumnsCount === 3) && iBeginPercentWidth < 33) // desktop
-					|| ((iMaxColumnsCount === 2) && iBeginPercentWidth === 0)); // tablet
-				},
-				[LT.ThreeColumnsMidExpandedEndHidden]: function() {
-					return (oColumnWidths.mid > oColumnWidths.begin) &&
-						oColumnWidths.end === 0 &&
-						((iMaxColumnsCount === 3 && iBeginPercentWidth >= 33)
-						|| (iMaxColumnsCount === 2 && iBeginWidth >= FlexibleColumnLayout.COLUMN_MIN_WIDTH));
-				}
+				[LT.TwoColumnsBeginExpanded]: () => oColumnWidths.begin >= oColumnWidths.mid,
+				[LT.TwoColumnsMidExpanded]: () => oColumnWidths.mid > oColumnWidths.begin,
+				[LT.ThreeColumnsEndExpanded]: () => (oColumnWidths.end > oColumnWidths.mid) && (iBeginPercentWidth < 33),
+				[LT.ThreeColumnsBeginExpandedEndHidden]: () => (oColumnWidths.begin >= oColumnWidths.mid) && oColumnWidths.end === 0,
+				[LT.ThreeColumnsMidExpanded]: () => (oColumnWidths.mid >= oColumnWidths.end) &&
+                (((iMaxColumnsCount === 3) && iBeginPercentWidth < 33) // desktop
+                || ((iMaxColumnsCount === 2) && iBeginPercentWidth === 0)),
+				[LT.ThreeColumnsMidExpandedEndHidden]: () => (oColumnWidths.mid > oColumnWidths.begin) &&
+                    oColumnWidths.end === 0 &&
+                    ((iMaxColumnsCount === 3 && iBeginPercentWidth >= 33)
+                    || (iMaxColumnsCount === 2 && iBeginWidth >= FlexibleColumnLayout.COLUMN_MIN_WIDTH))
 			};
 		return oLayoutMatchers[sLayout]();
 	};
@@ -2440,11 +2391,9 @@ sap.ui.define([
 		}
 	};
 
-	FlexibleColumnLayout.prototype._isNavigatingBackward = function (sLayout, sPreviousLayout) {
-		return ([LT.MidColumnFullScreen, LT.EndColumnFullScreen].indexOf(sPreviousLayout) > -1) ||
-			FlexibleColumnLayout.COLUMN_ORDER.indexOf(this._getLastVisibleColumnForLayout(sPreviousLayout)) >
-			FlexibleColumnLayout.COLUMN_ORDER.indexOf(this._getLastVisibleColumnForLayout(sLayout));
-	};
+	FlexibleColumnLayout.prototype._isNavigatingBackward = (sLayout, sPreviousLayout) => ([LT.MidColumnFullScreen, LT.EndColumnFullScreen].indexOf(sPreviousLayout) > -1) ||
+        FlexibleColumnLayout.COLUMN_ORDER.indexOf(this._getLastVisibleColumnForLayout(sPreviousLayout)) >
+        FlexibleColumnLayout.COLUMN_ORDER.indexOf(this._getLastVisibleColumnForLayout(sLayout));
 
 	/**
 	 *  Decides whether or not a given column should be revealed - another column slide out on top of it).
@@ -2470,20 +2419,14 @@ sap.ui.define([
 			|| (bWasFullScreen && bIsFullscreen && sPreviousLastVisibleColumn !== sColumn && bIsLastColumn));
 	};
 
-	FlexibleColumnLayout.prototype._isFullScreenLayout = function (sLayout) {
-		return sLayout === LT.OneColumn || sLayout === LT.MidColumnFullScreen || sLayout === LT.EndColumnFullScreen;
-	};
+	FlexibleColumnLayout.prototype._isFullScreenLayout = sLayout => sLayout === LT.OneColumn || sLayout === LT.MidColumnFullScreen || sLayout === LT.EndColumnFullScreen;
 
-	FlexibleColumnLayout.prototype._isInteractivelyResizedColumn = function (sColumn) {
-		return this._oMoveInfo && this._isColumnAdjacentToDraggedSeparator(sColumn);
-	};
+	FlexibleColumnLayout.prototype._isInteractivelyResizedColumn = sColumn => this._oMoveInfo && this._isColumnAdjacentToDraggedSeparator(sColumn);
 
-	FlexibleColumnLayout.prototype._isColumnAdjacentToDraggedSeparator = function (sColumn) {
-		return this._oMoveInfo &&
-			this._oMoveInfo.separator &&
-			(this._$columns[sColumn][0] === this._oMoveInfo.separator.previousElementSibling ||
-			 this._$columns[sColumn][0] === this._oMoveInfo.separator.nextElementSibling);
-	};
+	FlexibleColumnLayout.prototype._isColumnAdjacentToDraggedSeparator = sColumn => this._oMoveInfo &&
+        this._oMoveInfo.separator &&
+        (this._$columns[sColumn][0] === this._oMoveInfo.separator.previousElementSibling ||
+         this._$columns[sColumn][0] === this._oMoveInfo.separator.nextElementSibling);
 
 	/**
 	 * Decides whether or not a given column should be concealed - another column should slide in on top of it.
@@ -2619,9 +2562,7 @@ sap.ui.define([
 	 * @returns {number} The maximum number of columns
 	 * @public
 	 */
-	FlexibleColumnLayout.prototype.getMaxColumnsCount = function () {
-		return this._getMaxColumnsCountForWidth(this._getControlWidth());
-	};
+	FlexibleColumnLayout.prototype.getMaxColumnsCount = () => this._getMaxColumnsCountForWidth(this._getControlWidth());
 
 	/**
 	 * Returns the maximum number of columns that can be displayed at once for a certain control width
@@ -2716,11 +2657,7 @@ sap.ui.define([
 	 * @returns {boolean}
 	 * @private
 	 */
-	FlexibleColumnLayout.prototype._hasAnyColumnPagesRendered = function () {
-		return Object.keys(this._oRenderedColumnPagesBoolMap).some(function(sKey) {
-			return this._oRenderedColumnPagesBoolMap[sKey];
-		}, this);
-	};
+	FlexibleColumnLayout.prototype._hasAnyColumnPagesRendered = () => Object.keys(this._oRenderedColumnPagesBoolMap).some(sKey => this._oRenderedColumnPagesBoolMap[sKey], this);
 
 	/**
 	 * Obtains the names of the required column separators for the given layout.
@@ -3028,29 +2965,17 @@ sap.ui.define([
 		return this;
 	};
 
-	FlexibleColumnLayout.prototype.backBeginColumn = function(backData, oTransitionParameters) {
-		return this._getBeginColumn().back(backData, oTransitionParameters);
-	};
+	FlexibleColumnLayout.prototype.backBeginColumn = (backData, oTransitionParameters) => this._getBeginColumn().back(backData, oTransitionParameters);
 
-	FlexibleColumnLayout.prototype.backMidColumn = function(backData, oTransitionParameters) {
-		return this._getMidColumn().back(backData, oTransitionParameters);
-	};
+	FlexibleColumnLayout.prototype.backMidColumn = (backData, oTransitionParameters) => this._getMidColumn().back(backData, oTransitionParameters);
 
-	FlexibleColumnLayout.prototype.backEndColumn = function(backData, oTransitionParameters) {
-		return this._getEndColumn().back(backData, oTransitionParameters);
-	};
+	FlexibleColumnLayout.prototype.backEndColumn = (backData, oTransitionParameters) => this._getEndColumn().back(backData, oTransitionParameters);
 
-	FlexibleColumnLayout.prototype.backBeginColumnToPage = function(pageId, backData, oTransitionParameters) {
-		return this._getBeginColumn().backToPage(pageId, backData, oTransitionParameters);
-	};
+	FlexibleColumnLayout.prototype.backBeginColumnToPage = (pageId, backData, oTransitionParameters) => this._getBeginColumn().backToPage(pageId, backData, oTransitionParameters);
 
-	FlexibleColumnLayout.prototype.backMidColumnToPage = function(pageId, backData, oTransitionParameters) {
-		return this._getMidColumn().backToPage(pageId, backData, oTransitionParameters);
-	};
+	FlexibleColumnLayout.prototype.backMidColumnToPage = (pageId, backData, oTransitionParameters) => this._getMidColumn().backToPage(pageId, backData, oTransitionParameters);
 
-	FlexibleColumnLayout.prototype.backEndColumnToPage = function(pageId, backData, oTransitionParameters) {
-		return this._getEndColumn().backToPage(pageId, backData, oTransitionParameters);
-	};
+	FlexibleColumnLayout.prototype.backEndColumnToPage = (pageId, backData, oTransitionParameters) => this._getEndColumn().backToPage(pageId, backData, oTransitionParameters);
 
 	/**
 	 * Navigates back to the initial/top level of Begin column (this is the element aggregated as "initialPage", or the first added element).
@@ -3140,9 +3065,7 @@ sap.ui.define([
 	 * @public
 	 * @returns {sap.ui.core.Control} The UI5 control in the Begin column
 	 */
-	FlexibleColumnLayout.prototype.getCurrentBeginColumnPage = function() {
-		return this._getBeginColumn().getCurrentPage();
-	};
+	FlexibleColumnLayout.prototype.getCurrentBeginColumnPage = () => this._getBeginColumn().getCurrentPage();
 
 	/**
 	 * Returns the currently displayed Mid column page.
@@ -3150,9 +3073,7 @@ sap.ui.define([
 	 * @public
 	 * @returns {sap.ui.core.Control} The UI5 control in the Mid column
 	 */
-	FlexibleColumnLayout.prototype.getCurrentMidColumnPage = function() {
-		return this._getMidColumn().getCurrentPage();
-	};
+	FlexibleColumnLayout.prototype.getCurrentMidColumnPage = () => this._getMidColumn().getCurrentPage();
 
 	/**
 	 * Returns the currently displayed End column page.
@@ -3160,9 +3081,7 @@ sap.ui.define([
 	 * @public
 	 * @returns {sap.ui.core.Control} The UI5 control in the End column
 	 */
-	FlexibleColumnLayout.prototype.getCurrentEndColumnPage = function() {
-		return this._getEndColumn().getCurrentPage();
-	};
+	FlexibleColumnLayout.prototype.getCurrentEndColumnPage = () => this._getEndColumn().getCurrentPage();
 
 	FlexibleColumnLayout.prototype.setDefaultTransitionNameBeginColumn = function(sTransition) {
 		this.setProperty("defaultTransitionNameBeginColumn", sTransition, true);
@@ -3190,9 +3109,7 @@ sap.ui.define([
 	 * @private
 	 * @ui5-restricted sap.f.FlexibleColumnLayoutSemanticHelper
 	 */
-	FlexibleColumnLayout.prototype._getLayoutHistory = function () {
-		return this._oLayoutHistory;
-	};
+	FlexibleColumnLayout.prototype._getLayoutHistory = () => this._oLayoutHistory;
 
 	/**
 	 * Returns a string, representing the relative percentage sizes of the columns for the given layout in the format "begin/mid/end" (f.e. "33/67/0")
@@ -3235,16 +3152,12 @@ sap.ui.define([
 		// Used stored begin column width, if not fullscreen layout and the begin column should be shown
 		if (iBeginWidth && !this._isFullScreenLayout(sLayout) && parseInt(vResultAsArray[0]) !== 0) {
 			vResultAsArray[0] = iBeginWidth;
-			vResultAsArray = vResultAsArray.map(function (sColumnWidth) {
-				return parseFloat(sColumnWidth);
-			});
+			vResultAsArray = vResultAsArray.map(sColumnWidth => parseFloat(sColumnWidth));
 			normalizeColumnPercentWidths(vResultAsArray);
 		}
 
 		if (bAsIntArray) {
-			vResult = vResultAsArray.map(function (sColumnWidth) {
-				return Math.round(parseFloat(sColumnWidth));
-			});
+			vResult = vResultAsArray.map(sColumnWidth => Math.round(parseFloat(sColumnWidth)));
 			normalizeColumnPercentWidths(vResult);
 		}
 
@@ -3329,9 +3242,7 @@ sap.ui.define([
 	 * @private
 	 * @returns {Object} the resource bundle object
 	 */
-	FlexibleColumnLayout._getResourceBundle = function () {
-		return Library.getResourceBundleFor("sap.f");
-	};
+	FlexibleColumnLayout._getResourceBundle = () => Library.getResourceBundleFor("sap.f");
 
 
 	/**

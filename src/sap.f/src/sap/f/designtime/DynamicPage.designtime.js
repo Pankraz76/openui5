@@ -41,9 +41,7 @@ sap.ui.define([],
 				}
 			},
 			{
-				domRef : function(oElement) {
-					return oElement.$("vertSB-sb").get(0);
-				}
+				domRef : oElement => oElement.$("vertSB-sb").get(0)
 			}],
 		templates: {
 			create: "sap/f/designtime/DynamicPage.create.fragment.xml"

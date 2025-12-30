@@ -83,23 +83,17 @@ sap.ui.define([
 		}
 	};
 
-	Accessibility.prototype.getRootAttributes = function () {
-		return {
-			role: "banner",
-			label: this.oRb.getText("SHELLBAR_CONTAINER_LABEL")
-		};
-	};
+	Accessibility.prototype.getRootAttributes = () => ({
+        role: "banner",
+        label: this.oRb.getText("SHELLBAR_CONTAINER_LABEL")
+    });
 
-	Accessibility.prototype.getCoPilotAttributes = function () {
-		return {
-			role: "button",
-			label: this.oRb.getText("SHELLBAR_COPILOT_TOOLTIP")
-		};
-	};
+	Accessibility.prototype.getCoPilotAttributes = () => ({
+        role: "button",
+        label: this.oRb.getText("SHELLBAR_COPILOT_TOOLTIP")
+    });
 
-	Accessibility.prototype.getEntityTooltip = function (sEntity) {
-		return this.oRb.getText("SHELLBAR_" + sEntity + "_TOOLTIP") || "";
-	};
+	Accessibility.prototype.getEntityTooltip = sEntity => this.oRb.getText("SHELLBAR_" + sEntity + "_TOOLTIP") || "";
 
 	Accessibility.prototype.updateNotificationsNumber = function (sNotificationsNumber) {
 		var sTooltip = this.getEntityTooltip("NOTIFICATIONS"),

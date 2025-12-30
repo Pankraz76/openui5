@@ -206,9 +206,7 @@ sap.ui.define([
 		 * @returns {sap.f.ProductSwitch}
 		 * @private
 		 */
-		ProductSwitchItem.prototype._getProductSwitch = function () {
-			return this.getParent().getParent();
-		};
+		ProductSwitchItem.prototype._getProductSwitch = () => this.getParent().getParent();
 
 		ProductSwitchItem.prototype.onkeyup = function (oEvent) {
 			if ((oEvent.keyCode === KeyCodes.SPACE && !this._bEscapeShiftKeyPress)) {

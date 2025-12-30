@@ -80,9 +80,9 @@ function (
 		// Arrange
 		var oGrid = new GridList();
 
-		this.stub(GridList.prototype, "getDomRef").callsFake(function () {
-			return { test: "test" };
-		});
+		this.stub(GridList.prototype, "getDomRef").callsFake(() => ({
+            test: "test"
+        }));
 
 		// Act
 		var aGridDomRefs = oGrid.getGridDomRefs();
@@ -168,9 +168,7 @@ function (
 			child: {
 				addDelegate: that.oSpyAddDelegate,
 				removeEventDelegate: that.oSpyRemoveDelegate,
-				isA: function () {
-					return false;
-				}
+				isA: () => false
 			}
 		};
 
@@ -271,11 +269,9 @@ function (
 				items: {
 					path: "/Objects",
 					sorter: new Sorter("Category", false, true),
-					groupHeaderFactory: function (oGroup) {
-						return new GroupHeaderListItem({
-							title: oGroup.key
-						});
-					},
+					groupHeaderFactory: oGroup => new GroupHeaderListItem({
+                        title: oGroup.key
+                    }),
 					template: new CustomListItem({
 						content: new VBox({
 							items: new Text({

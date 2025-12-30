@@ -156,37 +156,19 @@ function (
 			}
 		],
 		oFactory = {
-			getSemanticPage: function (oConfiguration) {
-				return new SemanticPage(oConfiguration || {});
-			},
-			getSemanticTitle : function(oContainer) {
-				return new SemanticTitle(oContainer, null);
-			},
-			getSemanticFooter : function(oContainer) {
-				return new SemanticFooter(oContainer, null);
-			},
-			getSemanticShareMenu : function (oContainer) {
-				return new SemanticShareMenu(oContainer, this.getSemanticPage());
-			},
-			getDynamicPageTitle : function() {
-				return new DynamicPageTitle();
-			},
-			getOverflowToolbar : function() {
-				return new OverflowToolbar();
-			},
-			getActionSheet : function() {
-				return new ActionSheet();
-			},
-			getAction: function () {
-				return new Button({
-					text: "Action"
-				});
-			},
-			getMessageStrip: function (iNumber) {
-				return new MessageStrip({
-					text: "Content " + ++iNumber
-				});
-			},
+			getSemanticPage: oConfiguration => new SemanticPage(oConfiguration || {}),
+			getSemanticTitle : oContainer => new SemanticTitle(oContainer, null),
+			getSemanticFooter : oContainer => new SemanticFooter(oContainer, null),
+			getSemanticShareMenu : oContainer => new SemanticShareMenu(oContainer, this.getSemanticPage()),
+			getDynamicPageTitle : () => new DynamicPageTitle(),
+			getOverflowToolbar : () => new OverflowToolbar(),
+			getActionSheet : () => new ActionSheet(),
+			getAction: () => new Button({
+                text: "Action"
+            }),
+			getMessageStrip: iNumber => new MessageStrip({
+                text: "Content " + ++iNumber
+            }),
 			getMessageStrips: function (iNumber) {
 				var aMessageStrips = [];
 
@@ -195,42 +177,28 @@ function (
 				}
 				return aMessageStrips;
 			},
-			getTitle: function (sText) {
-				return new Title({
-					text: sText || "Default Title"
-				});
-			},
-			getBreadcrumbs: function () {
-				return new Breadcrumbs({
-					links: [
-						this.getLink({text: "Link"}),
-						this.getLink({text: "Link"}),
-						this.getLink({text: "Link"}),
-						this.getLink({text: "Link"}),
-						this.getLink({text: "Link"})
-					]
-				});
-			},
-			getLink: function(oConfig) {
-				return new Link(oConfig || {});
-			},
-			getSemanticConfiguration : function() {
-				return SemanticConfiguration;
-			},
-			getSemanticActionsMetadata : function() {
-				return aSemanticActionsMetadata;
-			}
+			getTitle: sText => new Title({
+                text: sText || "Default Title"
+            }),
+			getBreadcrumbs: () => new Breadcrumbs({
+                links: [
+                    this.getLink({text: "Link"}),
+                    this.getLink({text: "Link"}),
+                    this.getLink({text: "Link"}),
+                    this.getLink({text: "Link"}),
+                    this.getLink({text: "Link"})
+                ]
+            }),
+			getLink: oConfig => new Link(oConfig || {}),
+			getSemanticConfiguration : () => SemanticConfiguration,
+			getSemanticActionsMetadata : () => aSemanticActionsMetadata
 		};
 
 		aSemanticActionsMetadata.forEach(function (oSemanticActionMetadata) {
 			var sClassName = oSemanticActionMetadata.className,
 				oClass = oSemanticActionMetadata.constructor;
 
-			oFactory["get" + sClassName] = function() {
-				/*eslint-disable new-cap*/
-				return new oClass();
-				/*eslint-enable new-cap*/
-			};
+			oFactory["get" + sClassName] = () => new oClass();
 		});
 
 		return {

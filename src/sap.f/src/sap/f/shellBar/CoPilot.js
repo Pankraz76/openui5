@@ -50,9 +50,7 @@ sap.ui.define([
 		this.firePress({/* no parameters */});
 	};
 
-	CoPilot.prototype.getAnimation = function () {
-		return ControlBehavior.getAnimationMode() !== Configuration.AnimationMode.none;
-	};
+	CoPilot.prototype.getAnimation = () => ControlBehavior.getAnimationMode() !== Configuration.AnimationMode.none;
 
 	return CoPilot;
 });

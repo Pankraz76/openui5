@@ -25,7 +25,7 @@ sap.ui.define([
 		attachBorderReached: function () {
 			var aGridLists = this.getView().findAggregatedObjects(
 				false,
-				function (oElem) { return oElem.isA("sap.f.GridList"); }
+				oElem => oElem.isA("sap.f.GridList")
 			);
 
 			aGridLists.forEach(function (oGridList) {
@@ -101,12 +101,10 @@ sap.ui.define([
 			return null;
 		},
 
-		_getAllGrids: function () {
-			return this.getView().findAggregatedObjects(
-				false,
-				function (oElem) { return oElem.isA("sap.f.GridList"); }
-			);
-		}
+		_getAllGrids: () => this.getView().findAggregatedObjects(
+            false,
+            oElem => oElem.isA("sap.f.GridList")
+        )
 	});
 
 });

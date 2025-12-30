@@ -2056,9 +2056,7 @@ sap.ui.define([
 			new Text({
 				text: {
 					path: "money",
-					formatter: function(sValue) {
-						return sValue + " EUR";
-					}
+					formatter: sValue => sValue + " EUR"
 				}
 			})
 		]

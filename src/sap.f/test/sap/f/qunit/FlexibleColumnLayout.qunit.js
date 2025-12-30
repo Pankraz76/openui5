@@ -57,18 +57,14 @@ function(
 			TwoColumnsMidExpanded: 2
 		};
 
-	var fnCreatePage = function (sId, oContent) {
-		return new Page(sId, {
-			title: "Page: " + sId,
-			content: oContent || [
-				new Button({text: "Button"})
-			]
-		});
-	};
+	var fnCreatePage = (sId, oContent) => new Page(sId, {
+        title: "Page: " + sId,
+        content: oContent || [
+            new Button({text: "Button"})
+        ]
+    });
 
-	var fnGetResourceBundleText = function (sResourceBundleKey){
-		return FlexibleColumnLayout._getResourceBundle().getText(sResourceBundleKey);
-	};
+	var fnGetResourceBundleText = sResourceBundleKey => FlexibleColumnLayout._getResourceBundle().getText(sResourceBundleKey);
 
 	var fnCreateFCL = function (oMetadata) {
 		oMetadata = oMetadata || {};
@@ -140,10 +136,10 @@ function(
 			$("#" + sQUnitFixture).width(DESKTOP_SIZE); // > 1280px
 			ControlBehavior.setAnimationMode("none");
 
-			this.getBeginColumnBackArrow = function () { return this.oFCL.getAggregation("_beginColumnBackArrow"); };
-			this.getMidColumnBackArrow = function () { return this.oFCL.getAggregation("_midColumnBackArrow"); };
-			this.getMidColumnForwardArrow = function () { return this.oFCL.getAggregation("_midColumnForwardArrow"); };
-			this.getEndColumnForwardArrow = function () { return this.oFCL.getAggregation("_endColumnForwardArrow"); };
+			this.getBeginColumnBackArrow = () => this.oFCL.getAggregation("_beginColumnBackArrow");
+			this.getMidColumnBackArrow = () => this.oFCL.getAggregation("_midColumnBackArrow");
+			this.getMidColumnForwardArrow = () => this.oFCL.getAggregation("_midColumnForwardArrow");
+			this.getEndColumnForwardArrow = () => this.oFCL.getAggregation("_endColumnForwardArrow");
 		},
 		afterEach: function () {
 			$("html").attr("data-sap-ui-animation", this.sOldAnimationSetting);
@@ -578,9 +574,7 @@ function(
 			sNewWidthsDistribution,
 			iBeginColumnWidth,
 			iMidColumnWidth,
-			fnRoundColumnWidths = function (sColumnWidths) {
-				return sColumnWidths.split("/").map((sWidth) => parseFloat(sWidth).toFixed(0)).join("/");
-			};
+			fnRoundColumnWidths = sColumnWidths => sColumnWidths.split("/").map((sWidth) => parseFloat(sWidth).toFixed(0)).join("/");
 
 		dragSeparator("begin", -150, this.oFCL);
 		this.oFCL._attachAfterAllColumnsResizedOnce(function() {
@@ -904,9 +898,7 @@ function(
 
 		assert.strictEqual(this.oFCL._getBeginColumn().getInitialPage(), "page2", "The initial page was correctly set");
 
-		var sPagesIds = this.oFCL._getBeginColumn().getPages().map(function(oPage) {
-			return oPage.getId();
-		}).join("");
+		var sPagesIds = this.oFCL._getBeginColumn().getPages().map(oPage => oPage.getId()).join("");
 		assert.strictEqual(sPagesIds, "page1page2", "All given pages are in the Begin column nav container");
 
 		assert.strictEqual(this.oFCL._getBeginColumn().getDefaultTransitionName(), "fade", "The default transition was set to Begin column nav container");
@@ -947,9 +939,7 @@ function(
 
 		assert.strictEqual(this.oFCL._getMidColumn().getInitialPage(), "page2", "The initial page was correctly set");
 
-		var sPagesIds = this.oFCL._getMidColumn().getPages().map(function(oPage) {
-			return oPage.getId();
-		}).join("");
+		var sPagesIds = this.oFCL._getMidColumn().getPages().map(oPage => oPage.getId()).join("");
 		assert.strictEqual(sPagesIds, "page1page2", "All given pages are in the Mid column nav container");
 
 		assert.strictEqual(this.oFCL._getMidColumn().getDefaultTransitionName(), "fade", "The default transition was set to Mid column nav container");
@@ -990,9 +980,7 @@ function(
 
 		assert.strictEqual(this.oFCL._getEndColumn().getInitialPage(), "page2", "The initial page was correctly set");
 
-		var sPagesIds = this.oFCL._getEndColumn().getPages().map(function(oPage) {
-			return oPage.getId();
-		}).join("");
+		var sPagesIds = this.oFCL._getEndColumn().getPages().map(oPage => oPage.getId()).join("");
 		assert.strictEqual(sPagesIds, "page1page2", "All given pages are in the End column nav container");
 
 		assert.strictEqual(this.oFCL._getEndColumn().getDefaultTransitionName(), "fade", "The default transition was set to End column nav container");
@@ -1427,9 +1415,7 @@ function(
 	});
 
 	QUnit.test("Each column has correct region role and it's labeled correctly when there is no Landmark Info", function (assert) {
-		var fnGetLabelText = function (sColumnName) {
-			return this.oFCL.$(sColumnName).attr("aria-label");
-		}.bind(this);
+		var fnGetLabelText = (sColumnName => this.oFCL.$(sColumnName).attr("aria-label")).bind(this);
 
 		assert.strictEqual(this.oFCL.$("beginColumn").attr("role"), "region", "Begin column has correct role");
 		assert.strictEqual(this.oFCL.$("midColumn").attr("role"), "region", "Middle column has correct role");
@@ -1454,9 +1440,7 @@ function(
 		Core.applyChanges();
 
 		// Helper function
-		var fnGetLabelText = function (sColumnName) {
-			return this.oFCL.$(sColumnName).attr("aria-label");
-		}.bind(this);
+		var fnGetLabelText = (sColumnName => this.oFCL.$(sColumnName).attr("aria-label")).bind(this);
 
 		// Assert
 		assert.strictEqual(fnGetLabelText("beginColumn"), sTestFirstColumnLabel, "Begin column has its label changed by the Landmark Info");
@@ -1482,9 +1466,7 @@ function(
 		oSpy = this.spy(this.oFCL, "invalidate");
 
 		// Helper function
-		var fnGetLabelText = function (sColumnName) {
-			return this.oFCL.$(sColumnName).attr("aria-label");
-		}.bind(this);
+		var fnGetLabelText = (sColumnName => this.oFCL.$(sColumnName).attr("aria-label")).bind(this);
 
 		oLandmarkInfo.setFirstColumnLabel(sTestNewFirstColumnLabel);
 		oLandmarkInfo.setMiddleColumnLabel(sTestNewMiddleColumnLabel);
@@ -1738,15 +1720,14 @@ function(
 
 		this.oFCL = new FlexibleColumnLayout();
 		oSpy = this.spy(this.oFCL, "_measureControlWidth");
-		this.stub(this.oFCL, "$").callsFake(function() {
-			return {
-				is: function() { return true; },
-				width: function() {
-					// assert
-					assert.ok(true, "width() is only called, when control is visible");
-				}
-			};
-		});
+		this.stub(this.oFCL, "$").callsFake(() => ({
+            is: () => true,
+
+            width: function() {
+                // assert
+                assert.ok(true, "width() is only called, when control is visible");
+            }
+        }));
 
 		// act
 		this.oFCL._getControlWidth();
@@ -2456,9 +2437,7 @@ function(
 
 	(function () {
 		var oFullscreenLayouts = ["OneColumn", "MidColumnFullScreen", "EndColumnFullScreen"],
-			_oSplitScreenLayouts = Object.keys(library.LayoutType).filter(function(sLayout) {
-				return oFullscreenLayouts.indexOf(sLayout) < 0;
-		});
+			_oSplitScreenLayouts = Object.keys(library.LayoutType).filter(sLayout => oFullscreenLayouts.indexOf(sLayout) < 0);
 		Object.keys(_oSplitScreenLayouts).forEach(function(sLayoutName) {
 			_testDifferentLayoutsWidth(_oSplitScreenLayouts[sLayoutName]);
 		});

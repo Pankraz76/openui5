@@ -209,7 +209,50 @@
 				</executions>
 			</plugin>
 
+            <plugin>
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <executions><!-- todo: move to CI -->
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>dryRun</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 		</plugins>
+		<pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.openrewrite.maven</groupId>
+                    <artifactId>rewrite-maven-plugin</artifactId>
+                    <version>6.26.0</version>
+                    <configuration>
+                        <exportDatatables>true</exportDatatables>
+                        <failOnDryRunResults>true</failOnDryRunResults>
+                        <activeRecipes>
+                            <recipe>org.openrewrite.codemods.ecmascript.5to6.simpleArrow</recipe>
+                        </activeRecipes>
+                        <exclusions>
+                            <exclusion>**.ci-temp**</exclusion>
+                            <exclusion>**/thirdparty/**</exclusion>
+                            <exclusion>**demo**</exclusion>
+                        </exclusions>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.openrewrite.recipe</groupId>
+                            <artifactId>rewrite-codemods</artifactId>
+                            <version>0.23.1</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+		</pluginManagement>
+
+
 
 	</build>
 

@@ -177,9 +177,7 @@ sap.ui.define([], function () {
 		};
 	};
 
-	GridContainerRenderer.generateWrapperId = function (oItem, oGridContainer) {
-		return oGridContainer.getId() + "-item-" + oItem.getId();
-	};
+	GridContainerRenderer.generateWrapperId = (oItem, oGridContainer) => oGridContainer.getId() + "-item-" + oItem.getId();
 
 	/**
 	 * Renders a dummy area for keyboard handling purposes

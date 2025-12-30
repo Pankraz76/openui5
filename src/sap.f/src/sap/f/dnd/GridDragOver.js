@@ -156,9 +156,7 @@ sap.ui.define([
 	 * @public
 	 * @returns {DropPosition} The suggested position
 	 */
-	GridDragOver.prototype.getSuggestedDropPosition = function() {
-		return this._mLastDropPosition;
-	};
+	GridDragOver.prototype.getSuggestedDropPosition = () => this._mLastDropPosition;
 
 	/**
 	 * Sets a custom size in rows and columns for the indicator. Use to override the default one.
@@ -234,9 +232,7 @@ sap.ui.define([
 	 * Is the drag still active or it has ended.
 	 * @returns {boolean} True if the drag is still active, false if it was ended.
 	 */
-	GridDragOver.prototype._isDragActive = function() {
-		return this._oDragControl && this._oDropContainer;
-	};
+	GridDragOver.prototype._isDragActive = () => this._oDragControl && this._oDropContainer;
 
 	/**
 	 * Shows the drop indicator at the suggested position.

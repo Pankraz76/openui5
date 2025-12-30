@@ -397,17 +397,11 @@ sap.ui.define([
 		this.getInnerFocusItem(oCurrentItem).focus();
 	};
 
-	GridItemNavigation.prototype._getGridInstance = function () {
-		return Element.closestTo(this.oDomRef);
-	};
+	GridItemNavigation.prototype._getGridInstance = () => Element.closestTo(this.oDomRef);
 
-	GridItemNavigation.prototype.getInnerFocusItem = function (oItem) {
-		return oItem;
-	};
+	GridItemNavigation.prototype.getInnerFocusItem = oItem => oItem;
 
-	GridItemNavigation.prototype.getWrapperItem = function (oItem) {
-		return oItem;
-	};
+	GridItemNavigation.prototype.getWrapperItem = oItem => oItem;
 
 	return GridItemNavigation;
 });

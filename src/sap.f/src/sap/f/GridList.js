@@ -220,9 +220,7 @@ sap.ui.define([
 	 * @returns {HTMLElement[]} An array with the DOM elements
 	 * @protected
 	 */
-	GridList.prototype.getGridDomRefs = function () {
-		return [this.getItemsContainerDomRef()];
-	};
+	GridList.prototype.getGridDomRefs = () => [this.getItemsContainerDomRef()];
 
 	/**
 	 * Focuses an item in the given direction - up, down, left or right,

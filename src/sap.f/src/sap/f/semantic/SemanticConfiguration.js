@@ -33,9 +33,7 @@ sap.ui.define([
 	* @alias sap.f.semantic.SemanticConfiguration
 	*/
 	var SemanticConfiguration = BaseObject.extend("sap.f.semantic.SemanticConfiguration", {
-		getInterface: function() {
-			return this; // no facade
-		}
+		getInterface: () => this
 	});
 
 	/**
@@ -55,9 +53,7 @@ sap.ui.define([
 	* @param {string} sType
 	* @returns {boolean}
 	*/
-	SemanticConfiguration.isKnownSemanticType = function (sType) {
-		return SemanticConfiguration.getConfiguration(sType) !== null;
-	};
+	SemanticConfiguration.isKnownSemanticType = sType => SemanticConfiguration.getConfiguration(sType) !== null;
 
 	/**
 	* Returns the configuration of the semantic type.
@@ -65,9 +61,7 @@ sap.ui.define([
 	* @param {string} sType
 	* @returns {Object | null}
 	*/
-	SemanticConfiguration.getConfiguration = function (sType) {
-		return SemanticConfiguration._oTypeConfigs[sType] || null;
-	};
+	SemanticConfiguration.getConfiguration = sType => SemanticConfiguration._oTypeConfigs[sType] || null;
 
 	/**
 	* Returns the settings (ui5 properties) of the semantic type,
@@ -181,59 +175,51 @@ sap.ui.define([
 			placement: SemanticConfiguration._Placement.titleText,
 			order: 0,
 			mainAction : true,
-			getSettings: function() {
-				return {
-					type: ButtonType.Emphasized,
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					})};
-			}
+			getSettings: () => ({
+                type: ButtonType.Emphasized,
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                })
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.EditAction"] = {
 			placement: SemanticConfiguration._Placement.titleText,
 			order: 1,
-			getSettings: function() {
-				return {
-					text: oBundle.getText("SEMANTIC_CONTROL_EDIT"),
-					tooltip: oBundle.getText("SEMANTIC_CONTROL_EDIT"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                text: oBundle.getText("SEMANTIC_CONTROL_EDIT"),
+                tooltip: oBundle.getText("SEMANTIC_CONTROL_EDIT"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.DeleteAction"] = {
 			placement: SemanticConfiguration._Placement.titleText,
 			order: 2,
-			getSettings: function() {
-				return {
-					text: oBundle.getText("SEMANTIC_CONTROL_DELETE"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                text: oBundle.getText("SEMANTIC_CONTROL_DELETE"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.CopyAction"] = {
 			placement: SemanticConfiguration._Placement.titleText,
 			order: 3,
-			getSettings: function() {
-				return {
-					text: oBundle.getText("SEMANTIC_CONTROL_COPY"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                text: oBundle.getText("SEMANTIC_CONTROL_COPY"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.AddAction"] = {
 			placement: SemanticConfiguration._Placement.titleText,
 			order: 4,
-			getSettings: function() {
-				return {
-					text: oBundle.getText("SEMANTIC_CONTROL_ADD"),
-					tooltip: oBundle.getText("SEMANTIC_CONTROL_ADD"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                text: oBundle.getText("SEMANTIC_CONTROL_ADD"),
+                tooltip: oBundle.getText("SEMANTIC_CONTROL_ADD"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		// Title Semantic Icon Buttons
@@ -241,26 +227,22 @@ sap.ui.define([
 			placement: SemanticConfiguration._Placement.titleIcon,
 			order: 0,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("favorite"),
-					text: oBundle.getText("SEMANTIC_CONTROL_FAVORITE"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("favorite"),
+                text: oBundle.getText("SEMANTIC_CONTROL_FAVORITE"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.FlagAction"] = {
 			placement: SemanticConfiguration._Placement.titleIcon,
 			order: 1,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("flag"),
-					text: oBundle.getText("SEMANTIC_CONTROL_FLAG"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("flag"),
+                text: oBundle.getText("SEMANTIC_CONTROL_FLAG"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		// Title Semantic Icon navigation Actions
@@ -269,16 +251,16 @@ sap.ui.define([
 			order: 0,
 			constraints: "IconOnly",
 			navigation : true,
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("full-screen"),
-					tooltip: oBundle.getText("SEMANTIC_CONTROL_FULL_SCREEN"),
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					}),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("full-screen"),
+                tooltip: oBundle.getText("SEMANTIC_CONTROL_FULL_SCREEN"),
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                }),
+
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.ExitFullScreenAction"] = {
@@ -286,16 +268,16 @@ sap.ui.define([
 			order: 1,
 			constraints: "IconOnly",
 			navigation : true,
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("exit-full-screen"),
-					tooltip: oBundle.getText("SEMANTIC_CONTROL_EXIT_FULL_SCREEN"),
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					}),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("exit-full-screen"),
+                tooltip: oBundle.getText("SEMANTIC_CONTROL_EXIT_FULL_SCREEN"),
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                }),
+
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.CloseAction"] = {
@@ -303,16 +285,16 @@ sap.ui.define([
 			order: 2,
 			constraints: "IconOnly",
 			navigation : true,
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("decline"),
-					tooltip: oBundle.getText("SEMANTIC_CONTROL_CLOSE"),
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					}),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("decline"),
+                tooltip: oBundle.getText("SEMANTIC_CONTROL_CLOSE"),
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                }),
+
+                type: ButtonType.Transparent
+            })
 		};
 
 		// FOOTER Semantic LEFT Actions
@@ -320,30 +302,28 @@ sap.ui.define([
 			placement: SemanticConfiguration._Placement.footerLeft,
 			order: 0,
 			mainAction : false,
-			getSettings: function() {
+			getSettings: () => ({
+                icon: IconPool.getIconURI("message-popup"),
 
-				return {
-					icon: IconPool.getIconURI("message-popup"),
-					text: {
-						path: "message>/",
-						formatter: function (aMessages) {
-							return aMessages.length || 0;
-						}
-					},
-					tooltip: oBundle.getText("SEMANTIC_CONTROL_MESSAGES_INDICATOR"),
-					type: ButtonType.Emphasized,
-					visible: {
-						path: "message>/",
-						formatter: function (aMessages) {
-							return aMessages && aMessages.length > 0;
-						}
-					},
-					models: {message: Messaging.getMessageModel()},
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					})
-				};
-			}
+                text: {
+                    path: "message>/",
+                    formatter: aMessages => aMessages.length || 0
+                },
+
+                tooltip: oBundle.getText("SEMANTIC_CONTROL_MESSAGES_INDICATOR"),
+                type: ButtonType.Emphasized,
+
+                visible: {
+                    path: "message>/",
+                    formatter: aMessages => aMessages && aMessages.length > 0
+                },
+
+                models: {message: Messaging.getMessageModel()},
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                })
+            })
 		};
 
 		// FOOTER Semantic RIGHT Actions
@@ -352,53 +332,51 @@ sap.ui.define([
 			order: 0,
 			needPreprocesing: true,
 			mainAction : false,
-			getSettings: function() {
-				return {
-					layoutData: new OverflowToolbarLayoutData({shrinkable: false})
-				};
-			}
+			getSettings: () => ({
+                layoutData: new OverflowToolbarLayoutData({shrinkable: false})
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.FooterMainAction"] = {
 			placement: SemanticConfiguration._Placement.footerRight,
 			order: 1,
 			mainAction : true,
-			getSettings: function() {
-				return {
-					type: ButtonType.Emphasized,
-					text: oBundle.getText("SEMANTIC_CONTROL_SAVE"),
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					})};
-			}
+			getSettings: () => ({
+                type: ButtonType.Emphasized,
+                text: oBundle.getText("SEMANTIC_CONTROL_SAVE"),
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                })
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.PositiveAction"] = {
 			placement: SemanticConfiguration._Placement.footerRight,
 			order: 2,
 			mainAction : false,
-			getSettings: function() {
-				return {
-					type: ButtonType.Accept,
-					text: oBundle.getText("SEMANTIC_CONTROL_ACCEPT"),
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					})};
-			}
+			getSettings: () => ({
+                type: ButtonType.Accept,
+                text: oBundle.getText("SEMANTIC_CONTROL_ACCEPT"),
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                })
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.NegativeAction"] = {
 			placement: SemanticConfiguration._Placement.footerRight,
 			order: 3,
 			mainAction : false,
-			getSettings: function() {
-				return {
-					type: ButtonType.Reject,
-					text: oBundle.getText("SEMANTIC_CONTROL_REJECT"),
-					layoutData: new OverflowToolbarLayoutData({
-						priority: OverflowToolbarPriority.NeverOverflow
-					})};
-			}
+			getSettings: () => ({
+                type: ButtonType.Reject,
+                text: oBundle.getText("SEMANTIC_CONTROL_REJECT"),
+
+                layoutData: new OverflowToolbarLayoutData({
+                    priority: OverflowToolbarPriority.NeverOverflow
+                })
+            })
 		};
 
 
@@ -407,52 +385,44 @@ sap.ui.define([
 			placement: SemanticConfiguration._Placement.shareMenu,
 			order: 0,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("email"),
-					text: oBundle.getText("SEMANTIC_CONTROL_SEND_EMAIL"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("email"),
+                text: oBundle.getText("SEMANTIC_CONTROL_SEND_EMAIL"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.DiscussInJamAction"] = {
 			placement: SemanticConfiguration._Placement.shareMenu,
 			order: 1,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("discussion-2"),
-					text: oBundle.getText("SEMANTIC_CONTROL_DISCUSS_IN_WORK_ZONE"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("discussion-2"),
+                text: oBundle.getText("SEMANTIC_CONTROL_DISCUSS_IN_WORK_ZONE"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.ShareInJamAction"] = {
 			placement: SemanticConfiguration._Placement.shareMenu,
 			order: 2,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("share-2"),
-					text: oBundle.getText("SEMANTIC_CONTROL_SHARE_ON_WORK_ZONE"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("share-2"),
+                text: oBundle.getText("SEMANTIC_CONTROL_SHARE_ON_WORK_ZONE"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["sap.f.semantic.SendMessageAction"] = {
 			placement: SemanticConfiguration._Placement.shareMenu,
 			order: 3,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("discussion"),
-					text: oBundle.getText("SEMANTIC_CONTROL_SEND_MESSAGE"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("discussion"),
+                text: oBundle.getText("SEMANTIC_CONTROL_SEND_MESSAGE"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		oTypeConfigs["saveAsTileAction"] = {
@@ -465,13 +435,11 @@ sap.ui.define([
 			placement: SemanticConfiguration._Placement.shareMenu,
 			order: 5,
 			constraints: "IconOnly",
-			getSettings: function() {
-				return {
-					icon: IconPool.getIconURI("print"),
-					text: oBundle.getText("SEMANTIC_CONTROL_PRINT"),
-					type: ButtonType.Transparent
-				};
-			}
+			getSettings: () => ({
+                icon: IconPool.getIconURI("print"),
+                text: oBundle.getText("SEMANTIC_CONTROL_PRINT"),
+                type: ButtonType.Transparent
+            })
 		};
 
 		return oTypeConfigs;

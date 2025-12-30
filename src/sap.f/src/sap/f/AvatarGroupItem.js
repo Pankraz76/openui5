@@ -120,9 +120,7 @@ sap.ui.define([
 	 * @returns {string} The color of the avatar
 	 * @public
 	 */
-	AvatarGroupItem.prototype.getAvatarColor = function () {
-		return this._sAvatarColor;
-	};
+	AvatarGroupItem.prototype.getAvatarColor = () => this._sAvatarColor;
 
 
 	AvatarGroupItem.prototype._setGroupType = function (sValue) {
@@ -131,9 +129,7 @@ sap.ui.define([
 		this.invalidate();
 	};
 
-	AvatarGroupItem.prototype._getGroupType = function () {
-		return this._sGroupType;
-	};
+	AvatarGroupItem.prototype._getGroupType = () => this._sGroupType;
 
 	AvatarGroupItem.prototype._setInteractive = function (bInteractive) {
 		if (this._bInteractive === bInteractive) {
@@ -145,9 +141,7 @@ sap.ui.define([
 		this.invalidate();
 	};
 
-	AvatarGroupItem.prototype._getInteractive = function () {
-		return this._bInteractive;
-	};
+	AvatarGroupItem.prototype._getInteractive = () => this._bInteractive;
 
 	AvatarGroupItem.prototype._setAvatarColor = function (sValue) {
 		this._sAvatarColor = sValue;
@@ -159,27 +153,21 @@ sap.ui.define([
 		this._getAvatar().setDisplaySize(sValue);
 	};
 
-	AvatarGroupItem.prototype._getDisplaySize = function () {
-		return this._sAvatarDisplaySize;
-	};
+	AvatarGroupItem.prototype._getDisplaySize = () => this._sAvatarDisplaySize;
 
 	AvatarGroupItem.prototype._setCustomDisplaySize = function (sValue) {
 		this._sAvatarCustomDisplaySize = sValue;
 		this._getAvatar().setCustomDisplaySize(sValue);
 	};
 
-	AvatarGroupItem.prototype._getCustomDisplaySize = function () {
-		return this._sAvatarCustomDisplaySize;
-	};
+	AvatarGroupItem.prototype._getCustomDisplaySize = () => this._sAvatarCustomDisplaySize;
 
 	AvatarGroupItem.prototype._setCustomFontSize = function (sValue) {
 		this._sAvatarCustomFontSize = sValue;
 		this._getAvatar().setCustomFontSize(sValue);
 	};
 
-	AvatarGroupItem.prototype._getCustomFontSize = function () {
-		return this._sAvatarCustomFontSize;
-	};
+	AvatarGroupItem.prototype._getCustomFontSize = () => this._sAvatarCustomFontSize;
 
 	/**
 	 * Returns the <code>Avatar</code>

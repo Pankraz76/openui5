@@ -22,61 +22,53 @@ function (
 	"use strict";
 
 	return Promise.resolve()
-	.then(function () {
-		return elementDesigntimeTest({
-			type: "sap.f.DynamicPageTitle",
-			create: function () {
-				return new DynamicPageTitle({
-					heading : [new Title({text: "This is title"})],
-					content : [
-						new Text({text: "Title content 1"}),
-						new Text({text: "Title content 2"}),
-						new Text({text: "Title content 3"})
-					],
-					actions : [
-						new Button({text: "Action1"}),
-						new Button({text: "Action2"})
-					],
-					snappedContent : [
-						new Text({text: "Snapped content 1"}),
-						new Text({text: "Snapped content 2"})
-					],
-					expandedContent : [
-						new Text({text: "Expanded content 1"}),
-						new Text({text: "Expanded content 2"})
-					]
-				});
-			}
-		});
-	})
-	.then(function () {
-		return elementDesigntimeTest({
-			type: "sap.f.DynamicPageTitle (with snapped/expanded heading)",
-			create: function () {
-				return new DynamicPageTitle({
-					snappedHeading : new Title({text: "This is title"}),
-					expandedHeading : new Title({text: "This is an expanded title"}),
-					content : [
-						new Text({text: "Title content 1"}),
-						new Text({text: "Title content 2"}),
-						new Text({text: "Title content 3"})
-					],
-					actions : [
-						new Button({text: "Action1"}),
-						new Button({text: "Action2"})
-					],
-					snappedContent : [
-						new Text({text: "Snapped content 1"}),
-						new Text({text: "Snapped content 2"})
-					],
-					expandedContent : [
-						new Text({text: "Expanded content 1"}),
-						new Text({text: "Expanded content 2"})
-					]
-				});
-			}
-		});
-	})
+	.then(() => elementDesigntimeTest({
+        type: "sap.f.DynamicPageTitle",
+        create: () => new DynamicPageTitle({
+            heading : [new Title({text: "This is title"})],
+            content : [
+                new Text({text: "Title content 1"}),
+                new Text({text: "Title content 2"}),
+                new Text({text: "Title content 3"})
+            ],
+            actions : [
+                new Button({text: "Action1"}),
+                new Button({text: "Action2"})
+            ],
+            snappedContent : [
+                new Text({text: "Snapped content 1"}),
+                new Text({text: "Snapped content 2"})
+            ],
+            expandedContent : [
+                new Text({text: "Expanded content 1"}),
+                new Text({text: "Expanded content 2"})
+            ]
+        })
+    }))
+	.then(() => elementDesigntimeTest({
+        type: "sap.f.DynamicPageTitle (with snapped/expanded heading)",
+        create: () => new DynamicPageTitle({
+            snappedHeading : new Title({text: "This is title"}),
+            expandedHeading : new Title({text: "This is an expanded title"}),
+            content : [
+                new Text({text: "Title content 1"}),
+                new Text({text: "Title content 2"}),
+                new Text({text: "Title content 3"})
+            ],
+            actions : [
+                new Button({text: "Action1"}),
+                new Button({text: "Action2"})
+            ],
+            snappedContent : [
+                new Text({text: "Snapped content 1"}),
+                new Text({text: "Snapped content 2"})
+            ],
+            expandedContent : [
+                new Text({text: "Expanded content 1"}),
+                new Text({text: "Expanded content 2"})
+            ]
+        })
+    }))
 	.then(function() {
 		// ------------ HIDING THE CONTROL --------------
 		// Check if the remove action is working properly
@@ -102,11 +94,9 @@ function (
 			action : {
 				name : "remove",
 				controlId : "title",
-				parameter : function(oView){
-					return {
-						removedElement : oView.byId("title")
-					};
-				}
+				parameter : oView => ({
+                    removedElement : oView.byId("title")
+                })
 			},
 			afterAction : fnConfirmDynamicPageTitleIsInvisible,
 			afterUndo : fnConfirmDynamicPageTitleIsVisible,
@@ -170,23 +160,23 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("text1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "content",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "content",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("text1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "content",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "content",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			afterAction : fnConfirmContentElement1IsOn3rdPosition,
 			afterUndo : fnConfirmContentElement1IsOn1stPosition,
@@ -221,23 +211,23 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("text1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "expandedContent",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "expandedContent",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("text1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "expandedContent",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "expandedContent",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			afterAction : fnConfirmExpandedContentElement1IsOn3rdPosition,
 			afterUndo : fnConfirmExpandedContentElement1IsOn1stPosition,
@@ -272,23 +262,23 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("text1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "snappedContent",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "snappedContent",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("text1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "snappedContent",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "snappedContent",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			afterAction : fnConfirmSnappedContentElement1IsOn3rdPosition,
 			afterUndo : fnConfirmSnappedContentElement1IsOn1stPosition,
@@ -323,23 +313,23 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("btn1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("btn1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			afterAction : fnConfirmActionsContentElement1IsOn3rdPosition,
 			afterUndo : fnConfirmActionsContentElement1IsOn1stPosition,
@@ -374,34 +364,32 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("btn2"),
-							sourceIndex : 1,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("btn2"),
+                        sourceIndex : 1,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			previousActions: [ // OPTIONAL
 				{
 					name : "rename",
 					controlId : "btn2",
-					parameter: function (oView) {
-						return {
-							newValue: 'New Name',
-							renamedElement: oView.byId("btn2")
-						};
-					}
+					parameter: oView => ({
+                        newValue: 'New Name',
+                        renamedElement: oView.byId("btn2")
+                    })
 				}
 			],
 			afterAction : fnConfirmActionsContentElement2IsOn3rdPosition,
@@ -439,16 +427,15 @@ function (
 			action : {
 				name : "combine",
 				controlId : "action1",
-				parameter : function(oView){
-					return {
-						source : oView.byId("action1"),
-						combineElements : [
-							oView.byId("action1"),
-							oView.byId("action2"),
-							oView.byId("action3")
-						]
-					};
-				}
+				parameter : oView => ({
+                    source : oView.byId("action1"),
+
+                    combineElements : [
+                        oView.byId("action1"),
+                        oView.byId("action2"),
+                        oView.byId("action3")
+                    ]
+                })
 			},
 			layer : "VENDOR",
 			afterAction : fnConfirmActionElementsAreCombined,
@@ -499,13 +486,11 @@ function (
 			action : {
 				name : "split",
 				controlId : "menubtn",
-				parameter : function(oView){
-					return {
-						newElementIds : ["btn1", "btn2"],
-						source : oView.byId("menubtn"),
-						parentElement : oView.byId("title")
-					};
-				}
+				parameter : oView => ({
+                    newElementIds : ["btn1", "btn2"],
+                    source : oView.byId("menubtn"),
+                    parentElement : oView.byId("title")
+                })
 			},
 			layer: "VENDOR",
 			afterAction : fnConfirmActionElementsAreSplit,
@@ -541,45 +526,45 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView) {
-					return {
-						movedElements : [{
-							element : oView.byId("action1"),
-							sourceIndex : 1,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("action1"),
+                        sourceIndex : 1,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			previousActions: [ // OPTIONAL
 				{
 					name : "move",
 					controlId : "title",
-					parameter : function(oView) {
-						return {
-							movedElements : [{
-								element : oView.byId("action1"),
-								sourceIndex : 0,
-								targetIndex : 1
-							}],
-							source : {
-								aggregation: "actions",
-								parent: oView.byId("title")
-							},
-							target : {
-								aggregation: "actions",
-								parent: oView.byId("title")
-							}
-						};
-					}
+					parameter : oView => ({
+                        movedElements : [{
+                            element : oView.byId("action1"),
+                            sourceIndex : 0,
+                            targetIndex : 1
+                        }],
+
+                        source : {
+                            aggregation: "actions",
+                            parent: oView.byId("title")
+                        },
+
+                        target : {
+                            aggregation: "actions",
+                            parent: oView.byId("title")
+                        }
+                    })
 				}
 			],
 			changesAfterCondensing: 1, // OPTIONAL
@@ -619,45 +604,45 @@ function (
 			action : {
 				name : "move",
 				controlId : "title",
-				parameter : function(oView) {
-					return {
-						movedElements : [{
-							element : oView.byId("action1"),
-							sourceIndex : 1,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						},
-						target : {
-							aggregation: "actions",
-							parent: oView.byId("title")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("action1"),
+                        sourceIndex : 1,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    },
+
+                    target : {
+                        aggregation: "actions",
+                        parent: oView.byId("title")
+                    }
+                })
 			},
 			previousActions: [ // OPTIONAL
 				{
 					name : "move",
 					controlId : "title",
-					parameter : function(oView) {
-						return {
-							movedElements : [{
-								element : oView.byId("action1"),
-								sourceIndex : 0,
-								targetIndex : 1
-							}],
-							source : {
-								aggregation: "actions",
-								parent: oView.byId("title")
-							},
-							target : {
-								aggregation: "actions",
-								parent: oView.byId("title")
-							}
-						};
-					}
+					parameter : oView => ({
+                        movedElements : [{
+                            element : oView.byId("action1"),
+                            sourceIndex : 0,
+                            targetIndex : 1
+                        }],
+
+                        source : {
+                            aggregation: "actions",
+                            parent: oView.byId("title")
+                        },
+
+                        target : {
+                            aggregation: "actions",
+                            parent: oView.byId("title")
+                        }
+                    })
 				}
 			],
 			changesAfterCondensing: 2, // no condensing when getCondenserInfo returns undefined
@@ -679,9 +664,7 @@ function (
 			QUnit.test("No condensing for changes with no targetAggregation and no targetContainer", function(assert) {
 				var oSpy = sinon.spy(MoveDynamicPageTitleActions, "getCondenserInfo");
 				var oMockChange = {
-					getContent: function() {
-						return {};
-					},
+					getContent: () => ({}),
 					getRevertData: function() {}
 				};
 				MoveDynamicPageTitleActions.getCondenserInfo(oMockChange);

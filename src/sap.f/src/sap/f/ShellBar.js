@@ -685,9 +685,7 @@ function(
 	};
 
 	// Utility for getting current media range
-	ShellBar.prototype._getCurrentMediaRange = function () {
-		return this.$().length && Device.media.getCurrentRange(this._sRangeSet, this.$().outerWidth()).name;
-	};
+	ShellBar.prototype._getCurrentMediaRange = () => this.$().length && Device.media.getCurrentRange(this._sRangeSet, this.$().outerWidth()).name;
 
 	//Utility method for preparing and adding control to proper collection
 	ShellBar.prototype.addControlToCollection = function(oControl, aEntity) {
@@ -749,9 +747,7 @@ function(
 		this._oResponsiveHandler._handleResize();
 	};
 
-	ShellBar.prototype._getOverflowToolbar = function () {
-		return this._oOverflowToolbar;
-	};
+	ShellBar.prototype._getOverflowToolbar = () => this._oOverflowToolbar;
 
 	///////////////////////////
 	// Bar in page delegation

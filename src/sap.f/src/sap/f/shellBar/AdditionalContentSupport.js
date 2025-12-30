@@ -154,13 +154,9 @@ sap.ui.define([
 				return this;
 			};
 
-			this._destroyAllAdditionalContent = function (oControl) {
-				return oControl.destroy();
-			};
+			this._destroyAllAdditionalContent = oControl => oControl.destroy();
 
-			this.getAdditionalContent = function () {
-				return this._aAdditionalContent;
-			};
+			this.getAdditionalContent = () => this._aAdditionalContent;
 
 			this._updateParent = function () {
 				this._bOTBUpdateNeeded = true;

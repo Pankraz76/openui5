@@ -98,9 +98,7 @@ sap.ui.define(["sap/m/library", "./SemanticContainer"], function(mobileLibrary, 
 		return this;
 	};
 
-	SemanticTitle.prototype.indexOfCustomTextAction = function(oCustomControl) {
-		return this._aCustomTextActions.indexOf(oCustomControl);
-	};
+	SemanticTitle.prototype.indexOfCustomTextAction = oCustomControl => this._aCustomTextActions.indexOf(oCustomControl);
 
 	SemanticTitle.prototype.removeCustomTextAction = function(oCustomControl) {
 		var iIndex = this._aCustomTextActions.indexOf(oCustomControl),
@@ -132,9 +130,7 @@ sap.ui.define(["sap/m/library", "./SemanticContainer"], function(mobileLibrary, 
 		return this;
 	};
 
-	SemanticTitle.prototype.getCustomTextActions = function() {
-		return this._aCustomTextActions.slice();
-	};
+	SemanticTitle.prototype.getCustomTextActions = () => this._aCustomTextActions.slice();
 
 	/*
 	* CUSTOM ICON ACTIONS
@@ -153,9 +149,7 @@ sap.ui.define(["sap/m/library", "./SemanticContainer"], function(mobileLibrary, 
 		return this;
 	};
 
-	SemanticTitle.prototype.indexOfCustomIconAction = function(oCustomControl) {
-		return this._aCustomIconActions.indexOf(oCustomControl);
-	};
+	SemanticTitle.prototype.indexOfCustomIconAction = oCustomControl => this._aCustomIconActions.indexOf(oCustomControl);
 
 	SemanticTitle.prototype.removeCustomIconAction = function(oCustomControl) {
 		var iIndex = this._aCustomIconActions.indexOf(oCustomControl),
@@ -183,9 +177,7 @@ sap.ui.define(["sap/m/library", "./SemanticContainer"], function(mobileLibrary, 
 		return this;
 	};
 
-	SemanticTitle.prototype.getCustomIconActions = function() {
-		return this._aCustomIconActions.slice();
-	};
+	SemanticTitle.prototype.getCustomIconActions = () => this._aCustomIconActions.slice();
 
 
 	/*
@@ -344,9 +336,7 @@ sap.ui.define(["sap/m/library", "./SemanticContainer"], function(mobileLibrary, 
 	* @private
 	* @returns {int}
 	*/
-	SemanticTitle.prototype._getSemanticTextMainActionInsertIndex = function() {
-		return 0;
-	};
+	SemanticTitle.prototype._getSemanticTextMainActionInsertIndex = () => 0;
 
 	/*
 	* Determines the insert index of the custom text action
@@ -457,9 +447,7 @@ sap.ui.define(["sap/m/library", "./SemanticContainer"], function(mobileLibrary, 
 	* @private
 	* @returns {int}
 	*/
-	SemanticTitle.prototype._getSemanticShareMenuInsertIndex = function() {
-		return this._callContainerAggregationMethod("getActions").length;
-	};
+	SemanticTitle.prototype._getSemanticShareMenuInsertIndex = () => this._callContainerAggregationMethod("getActions").length;
 
 	/**
 	* Retrieves the container`s internal aggregation.

@@ -69,9 +69,7 @@ sap.ui.define(['sap/m/InstanceManager', 'sap/f/FlexibleColumnLayout', 'sap/ui/ba
 		 * @public
 		 * @returns {boolean} A flag indication if dialogs will be closed
 		 */
-		TargetHandler.prototype.getCloseDialogs = function () {
-			return this._bCloseDialogs;
-		};
+		TargetHandler.prototype.getCloseDialogs = () => this._bCloseDialogs;
 
 		TargetHandler.prototype.addNavigation = function(oParameters) {
 			this._aQueue.push(oParameters);
@@ -207,9 +205,7 @@ sap.ui.define(['sap/m/InstanceManager', 'sap/f/FlexibleColumnLayout', 'sap/ui/ba
 					oTargetControl.getCurrentEndColumnPage()
 				];
 
-				bSkipNavigation = aColumnsCurrentPages.some(function(oCurrentPage) {
-					return oCurrentPage && oCurrentPage.getId() === sViewId;
-				});
+				bSkipNavigation = aColumnsCurrentPages.some(oCurrentPage => oCurrentPage && oCurrentPage.getId() === sViewId);
 			}
 
 			// If the page we are going to navigate is already displayed,

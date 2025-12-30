@@ -675,18 +675,14 @@ sap.ui.define([
 		return oContextMenu;
 	};
 
-	SidePanel.prototype._getSideContentExpanded = function() {
-		return this.getProperty("sideContentExpanded");
-	};
+	SidePanel.prototype._getSideContentExpanded = () => this.getProperty("sideContentExpanded");
 
 	SidePanel.prototype._setSideContentExpanded = function(bState) {
 		this._isSingleItem() && this.setActionBarExpanded(bState);
 		return this.setProperty("sideContentExpanded", bState);
 	};
 
-	SidePanel.prototype._getFocusDomRef = function (oItem) {
-		return oItem.getDomRef();
-	};
+	SidePanel.prototype._getFocusDomRef = oItem => oItem.getDomRef();
 
 	SidePanel.prototype._focusMain = function() {
 		if (this._oPreviousFocusedMainElement) {
@@ -963,17 +959,11 @@ sap.ui.define([
 		return sAriaLabel ? sAriaLabel : oResourceBundle.getText("SIDEPANEL_DEFAULT_ARIA_LABEL");
 	};
 
-	SidePanel.prototype._getOverflowItemText = function () {
-		return this._bOverflowMenuOpened ? oResourceBundle.getText("SIDEPANEL_SHOW_LESS_TEXT") : oResourceBundle.getText("SIDEPANEL_MORE_ACTIONS_TEXT");
-	};
+	SidePanel.prototype._getOverflowItemText = () => this._bOverflowMenuOpened ? oResourceBundle.getText("SIDEPANEL_SHOW_LESS_TEXT") : oResourceBundle.getText("SIDEPANEL_MORE_ACTIONS_TEXT");
 
-	SidePanel.prototype._getSideContentAriaLabel = function () {
-		return oResourceBundle.getText("SIDEPANEL_CONTENT_ARIA_LABEL");
-	};
+	SidePanel.prototype._getSideContentAriaLabel = () => oResourceBundle.getText("SIDEPANEL_CONTENT_ARIA_LABEL");
 
-	SidePanel.prototype._getSplitterTitle = function () {
-		return oResourceBundle.getText("SIDEPANEL_RESIZE_SPLITTER_TITLE");
-	};
+	SidePanel.prototype._getSplitterTitle = () => oResourceBundle.getText("SIDEPANEL_RESIZE_SPLITTER_TITLE");
 
 	SidePanel.prototype._toggleItemSelection = function(oItem) {
 		var oNewSelectedItem,
@@ -1074,9 +1064,7 @@ sap.ui.define([
 		}
 	};
 
-	SidePanel.prototype._getSelectedItem = function() {
-		return Element.getElementById(this.getSelectedItem());
-	};
+	SidePanel.prototype._getSelectedItem = () => Element.getElementById(this.getSelectedItem());
 
 	SidePanel.prototype._getSideContentHeaderTitle = function() {
 		var oSelectedItem = this._getSelectedItem();
@@ -1230,9 +1218,7 @@ sap.ui.define([
 		F6Navigation.handleF6GroupNavigation(oEventF6);
 	};
 
-	SidePanel.prototype._isSingleItem = function() {
-		return this.getItems().length === 1;
-	};
+	SidePanel.prototype._isSingleItem = () => this.getItems().length === 1;
 
 	SidePanel.prototype._calculatePixelWidth = function(vWidth) {
 		if (typeof vWidth === "string") {
@@ -1247,27 +1233,17 @@ sap.ui.define([
 		return vWidth;
 	};
 
-	SidePanel.prototype._getControlWidth = function() {
-		return parseInt(window.getComputedStyle(this.getDomRef()).width);
-	};
+	SidePanel.prototype._getControlWidth = () => parseInt(window.getComputedStyle(this.getDomRef()).width);
 
-	SidePanel.prototype._getSidePanelWidth = function() {
-		return this._calculatePixelWidth(this.getSidePanelWidth());
-	};
+	SidePanel.prototype._getSidePanelWidth = () => this._calculatePixelWidth(this.getSidePanelWidth());
 
-	SidePanel.prototype._getSidePanelMinWidth = function() {
-		return this._calculatePixelWidth(this.getSidePanelMinWidth());
-	};
+	SidePanel.prototype._getSidePanelMinWidth = () => this._calculatePixelWidth(this.getSidePanelMinWidth());
 
-	SidePanel.prototype._getSidePanelMaxWidth = function() {
-		return this._calculatePixelWidth(this.getSidePanelMaxWidth());
-	};
+	SidePanel.prototype._getSidePanelMaxWidth = () => this._calculatePixelWidth(this.getSidePanelMaxWidth());
 
 	// Side Panel resizable-related methods
 
-	SidePanel.prototype._isResizable = function() {
-		return this.getSidePanelResizable() && !Device.system.phone && (this.getActionBarExpanded() || this._getSideContentExpanded());
-	};
+	SidePanel.prototype._isResizable = () => this.getSidePanelResizable() && !Device.system.phone && (this.getActionBarExpanded() || this._getSideContentExpanded());
 
 	SidePanel.prototype._attachResizableHandlers = function() {
 		var oDomRef = this.getDomRef(),

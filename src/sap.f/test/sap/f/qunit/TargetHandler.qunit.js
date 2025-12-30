@@ -16,9 +16,7 @@ function (
 		// Arrange
 		var oTargetHandler = new TargetHandler(),
             oDialog = new Dialog(),
-			oStub = this.stub(oTargetHandler, "_getDirection").callsFake(function () {
-				return true;
-			}),
+			oStub = this.stub(oTargetHandler, "_getDirection").callsFake(() => true),
 			oSpy = this.spy(oDialog, "close");
 
         // Act

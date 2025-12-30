@@ -11,25 +11,15 @@ sap.ui.define([],
 			aggregations: {
 				heading: {
 					domRef: ":sap-domref .sapFDynamicPageTitleMainHeadingInner",
-					ignore: function (oElement) {
-						return !oElement.getHeading();
-					}
+					ignore: oElement => !oElement.getHeading()
 				},
 				expandedHeading: {
-					domRef: function (oElement) {
-						return oElement.$("expand-heading-wrapper").get(0);
-					},
-					ignore: function (oElement) {
-						return oElement.getHeading() || !oElement.getExpandedHeading();
-					}
+					domRef: oElement => oElement.$("expand-heading-wrapper").get(0),
+					ignore: oElement => oElement.getHeading() || !oElement.getExpandedHeading()
 				},
 				snappedHeading: {
-					domRef: function (oElement) {
-						return oElement.$("snapped-heading-wrapper").get(0);
-					},
-					ignore: function (oElement) {
-						return oElement.getHeading() || !oElement.getSnappedHeading();
-					}
+					domRef: oElement => oElement.$("snapped-heading-wrapper").get(0),
+					ignore: oElement => oElement.getHeading() || !oElement.getSnappedHeading()
 				},
 				actions: {
 					domRef: ":sap-domref .sapFDynamicPageTitleMainActions",
@@ -54,9 +44,7 @@ sap.ui.define([],
 					}
 				},
 				snappedContent: {
-					domRef: function (oElement) {
-						return oElement.$("snapped-wrapper").get(0);
-					},
+					domRef: oElement => oElement.$("snapped-wrapper").get(0),
 					actions: {
 						move: {
 							changeType: "moveControls"
@@ -64,9 +52,7 @@ sap.ui.define([],
 					}
 				},
 				expandedContent: {
-					domRef: function (oElement) {
-						return oElement.$("expand-wrapper").get(0);
-					},
+					domRef: oElement => oElement.$("expand-wrapper").get(0),
 					actions: {
 						move: {
 							changeType: "moveControls"

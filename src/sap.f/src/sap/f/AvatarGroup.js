@@ -295,9 +295,7 @@ sap.ui.define([
 		this._onResize();
 	};
 
-	AvatarGroup.prototype._getResourceBundle = function () {
-		return Library.getResourceBundleFor("sap.f");
-	};
+	AvatarGroup.prototype._getResourceBundle = () => Library.getResourceBundleFor("sap.f");
 
 	AvatarGroup.prototype._updateAccState = function () {
 		var oResourceBundle = this._getResourceBundle(),
@@ -560,9 +558,7 @@ sap.ui.define([
 	 * @returns {int} width
 	 * @private
 	 */
-	AvatarGroup.prototype._getWidth = function () {
-		return Math.ceil(this.$().width());
-	};
+	AvatarGroup.prototype._getWidth = () => Math.ceil(this.$().width());
 
 	/**
 	 * Handles the resize event of the <code>AvatarGroup</code>.
@@ -633,9 +629,7 @@ sap.ui.define([
 	 *
 	 * @private
 	 */
-	AvatarGroup.prototype._shouldShowMoreButton = function () {
-		return this._bShowMoreButton;
-	};
+	AvatarGroup.prototype._shouldShowMoreButton = () => this._bShowMoreButton;
 
 	return AvatarGroup;
 });

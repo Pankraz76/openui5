@@ -43,26 +43,22 @@ sap.ui.define(['sap/ui/core/routing/Target', 'sap/f/FlexibleColumnLayout'],
 					that = this;
 
 				// chain to navigation promise to keep the order of navigations!
-				return this._oTargetHandler._chainNavigation(function() {
-					return oPromise.then(function(oViewInfo) {
-						that._oTargetHandler.addNavigation({
-							navigationIdentifier : that._oOptions._name,
-							transition: that._oOptions.transition,
-							transitionParameters: that._oOptions.transitionParameters,
-							eventData: vData,
-							targetControl: oViewInfo.control,
-							view: oViewInfo.view,
-							layout: oRouteConfig.layout,
-							placeholderConfig: oViewInfo.placeholderConfig
-						});
-						return oViewInfo;
-					});
-				}, this._oOptions._name);
+				return this._oTargetHandler._chainNavigation(() => oPromise.then(function(oViewInfo) {
+                    that._oTargetHandler.addNavigation({
+                        navigationIdentifier : that._oOptions._name,
+                        transition: that._oOptions.transition,
+                        transitionParameters: that._oOptions.transitionParameters,
+                        eventData: vData,
+                        targetControl: oViewInfo.control,
+                        view: oViewInfo.view,
+                        layout: oRouteConfig.layout,
+                        placeholderConfig: oViewInfo.placeholderConfig
+                    });
+                    return oViewInfo;
+                }), this._oOptions._name);
 
 			},
-			showPlaceholder : function(mSettings) {
-				return this._oTargetHandler.showPlaceholder(mSettings);
-			},
+			showPlaceholder : mSettings => this._oTargetHandler.showPlaceholder(mSettings),
 			hidePlaceholder : function(mSettings) {
 				/**
 				 * Overriding the hidePlaceholder to empty function because the placeholder is removed

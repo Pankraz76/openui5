@@ -5,13 +5,11 @@ sap.ui.define(["sap/f/ProductSwitch", "sap/f/ProductSwitchItem", "sap/ui/core/Li
 
 		var TESTS_DOM_CONTAINER = "qunit-fixture",
 			oUtil = {
-				getProductSwitchItem: function (sTitle, sSubTitle, sSrc) {
-					return new ProductSwitchItem({
-						title: sTitle,
-						subTitle: sSubTitle,
-						src: sSrc
-					});
-				},
+				getProductSwitchItem: (sTitle, sSubTitle, sSrc) => new ProductSwitchItem({
+                    title: sTitle,
+                    subTitle: sSubTitle,
+                    src: sSrc
+                }),
 				getProductSwitchItems: function (iCount) {
 					var aCreatedItems = [];
 
@@ -21,9 +19,7 @@ sap.ui.define(["sap/f/ProductSwitch", "sap/f/ProductSwitchItem", "sap/ui/core/Li
 
 					return aCreatedItems;
 				},
-				getProductSwitch: function (iCount) {
-					return new ProductSwitch({items: this.getProductSwitchItems(iCount)});
-				}
+				getProductSwitch: iCount => new ProductSwitch({items: this.getProductSwitchItems(iCount)})
 			};
 
 		QUnit.module("ProductSwitch - API ", {

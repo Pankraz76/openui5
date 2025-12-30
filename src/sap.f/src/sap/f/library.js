@@ -202,9 +202,7 @@ sap.ui.define([
 	* @since 1.54
 	*/
 	thisLib.DynamicPageTitleShrinkRatio = DataType.createType('sap.f.DynamicPageTitleShrinkRatio', {
-		isValid : function(vValue) {
-			return /^(([0-9]\d*)(\.\d)?:([0-9]\d*)(\.\d)?:([0-9]\d*)(\.\d)?)$/.test(vValue);
-		}
+		isValid : vValue => /^(([0-9]\d*)(\.\d)?:([0-9]\d*)(\.\d)?:([0-9]\d*)(\.\d)?)$/.test(vValue)
 
 	}, DataType.getType('string'));
 

@@ -33,9 +33,7 @@ sap.ui.define([
 			this._aSemanticRightContent = [];
 			this._iSemanticLeftContentCount = 1;
 
-			this._fnParentSubstitute = function () {
-				return this._oParent;
-			}.bind(this);
+			this._fnParentSubstitute = (() => this._oParent).bind(this);
 
 			this._insertSpacer();
 		}
@@ -65,13 +63,9 @@ sap.ui.define([
 		return this;
 	};
 
-	SemanticFooter.prototype.getCustomActions = function() {
-		return this._aCustomContent.slice();
-	};
+	SemanticFooter.prototype.getCustomActions = () => this._aCustomContent.slice();
 
-	SemanticFooter.prototype.indexOfCustomAction = function(oCustomControl) {
-		return this._aCustomContent.indexOf(oCustomControl);
-	};
+	SemanticFooter.prototype.indexOfCustomAction = oCustomControl => this._aCustomContent.indexOf(oCustomControl);
 
 	SemanticFooter.prototype.removeCustomAction = function(oCustomControl) {
 		var vResult =  this._callContainerAggregationMethod("removeContent", oCustomControl);
@@ -218,9 +212,7 @@ sap.ui.define([
 	*
 	* @returns {int}
 	*/
-	SemanticFooter.prototype._getSemanticLeftContentInsertIndex = function(iControlOrder) {
-		return this._iSemanticLeftContentCount > 1 ? iControlOrder : 0;
-	};
+	SemanticFooter.prototype._getSemanticLeftContentInsertIndex = iControlOrder => this._iSemanticLeftContentCount > 1 ? iControlOrder : 0;
 
 	/*
 	* Determines the insert index of the content that is about to be added
@@ -239,9 +231,7 @@ sap.ui.define([
 	*
 	* @returns {int}
 	*/
-	SemanticFooter.prototype._getCustomContentInsertIndex = function(iIndex) {
-		return iIndex + this._iSemanticLeftContentCount + this._aSemanticRightContent.length;
-	};
+	SemanticFooter.prototype._getCustomContentInsertIndex = iIndex => iIndex + this._iSemanticLeftContentCount + this._aSemanticRightContent.length;
 
 	/*
 	* Inserts a <code>sap.m.ToolbarSpacer</code>

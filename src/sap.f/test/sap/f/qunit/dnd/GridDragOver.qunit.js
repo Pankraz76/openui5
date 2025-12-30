@@ -41,12 +41,8 @@ sap.ui.define([
 			setIndicatorConfig: function (oConfig) {
 				this._indicatorConfig = oConfig;
 			},
-			getIndicatorConfig: function (oConfig) {
-				return this._indicatorConfig;
-			},
-			getIndicator: function (oConfig) {
-				return document.getElementById("fakeDnDIndicator");
-			}
+			getIndicatorConfig: oConfig => this._indicatorConfig,
+			getIndicator: oConfig => document.getElementById("fakeDnDIndicator")
 		};
 	}
 

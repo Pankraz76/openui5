@@ -64,136 +64,132 @@ sap.ui.define([
 	"use strict";
 
 	return Promise.resolve()
-	.then(function () {
-		return elementDesigntimeTest({
-			type: "sap.f.DynamicPage",
-			create: function () {
-				return new SemanticPage({
-					showFooter : true,
-					titleHeading : new Title({text : "Title text"}),
-					titleSnappedHeading : [new Text({text : "Collapsed header content"})],
-					titleExpandedHeading : [new Text({text : "Expanded header content"})],
-					titleSnappedContent : [new Text({text : "Collapsed subheading"})],
-					titleExpandedContent : [new Text({text : "Expanded subheading"})],
-					titleMainAction : new TitleMainAction({text : "TitleMainAction Text"}),
-					titleContent: [
-						new Text({text: "Title Content 1"}),
-						new Text({text: "Title Content 2"}),
-						new Text({text: "Title Content 3"})
-					],
-					editAction : new EditAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					addAction : new AddAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					deleteAction : new DeleteAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					copyAction : new CopyAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					flagAction : new FlagAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					favoriteAction : new FavoriteAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					fullScreenAction : new FullScreenAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					exitFullScreenAction : new ExitFullScreenAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					closeAction : new CloseAction({
-						layoutData : [
-							new OverflowToolbarLayoutData({
-								priority : "NeverOverflow"
-							})
-						]
-					}),
-					titleCustomTextActions: [
-						new Button({
-							text : "Title Custom Text Actions",
-							layoutData : [
-								new OverflowToolbarLayoutData({
-									priority : "NeverOverflow"
-								})
-							]
-						})
-					],
-					titleCustomIconActions : [
-						new OverflowToolbarButton({
-							icon: "sap-icon://cart",
-							layoutData : [
-								new OverflowToolbarLayoutData({
-									priority : "NeverOverflow"
-								})
-							]
-						})
-					],
-					headerContent : [
-						new Text({text : "Some Header Content"})
-					],
-					content : new Text({text : "Some sample content"}),
-					footerMainAction : new FooterMainAction(),
-					messagesIndicator : new MessagesIndicator({
-						visible: true
-					}),
-					draftIndicator : new DraftIndicator(),
-					positiveAction : new PositiveAction(),
-					negativeAction : new NegativeAction(),
-					footerCustomActions : new Button({text : "Footer Custom Action"}),
-					discussInJamAction : new DiscussInJamAction(),
-					saveAsTileAction : new Button({text : "Save as Tile Action"}),
-					shareInJamAction : new ShareInJamAction(),
-					sendMessageAction : new SendMessageAction(),
-					sendEmailAction : new SendEmailAction(),
-					printAction : new PrintAction(),
-					customShareActions : new Button({text : "Custom Share Action"}),
-					titleBreadcrumbs : new Breadcrumbs({
-						currentLocationText : "test",
-						links : [
-							new Link({text: "link1"}),
-							new Link({text: "link2"})
-						]
-					})
-				});
-			}
-		});
-	})
+	.then(() => elementDesigntimeTest({
+        type: "sap.f.DynamicPage",
+        create: () => new SemanticPage({
+            showFooter : true,
+            titleHeading : new Title({text : "Title text"}),
+            titleSnappedHeading : [new Text({text : "Collapsed header content"})],
+            titleExpandedHeading : [new Text({text : "Expanded header content"})],
+            titleSnappedContent : [new Text({text : "Collapsed subheading"})],
+            titleExpandedContent : [new Text({text : "Expanded subheading"})],
+            titleMainAction : new TitleMainAction({text : "TitleMainAction Text"}),
+            titleContent: [
+                new Text({text: "Title Content 1"}),
+                new Text({text: "Title Content 2"}),
+                new Text({text: "Title Content 3"})
+            ],
+            editAction : new EditAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            addAction : new AddAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            deleteAction : new DeleteAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            copyAction : new CopyAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            flagAction : new FlagAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            favoriteAction : new FavoriteAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            fullScreenAction : new FullScreenAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            exitFullScreenAction : new ExitFullScreenAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            closeAction : new CloseAction({
+                layoutData : [
+                    new OverflowToolbarLayoutData({
+                        priority : "NeverOverflow"
+                    })
+                ]
+            }),
+            titleCustomTextActions: [
+                new Button({
+                    text : "Title Custom Text Actions",
+                    layoutData : [
+                        new OverflowToolbarLayoutData({
+                            priority : "NeverOverflow"
+                        })
+                    ]
+                })
+            ],
+            titleCustomIconActions : [
+                new OverflowToolbarButton({
+                    icon: "sap-icon://cart",
+                    layoutData : [
+                        new OverflowToolbarLayoutData({
+                            priority : "NeverOverflow"
+                        })
+                    ]
+                })
+            ],
+            headerContent : [
+                new Text({text : "Some Header Content"})
+            ],
+            content : new Text({text : "Some sample content"}),
+            footerMainAction : new FooterMainAction(),
+            messagesIndicator : new MessagesIndicator({
+                visible: true
+            }),
+            draftIndicator : new DraftIndicator(),
+            positiveAction : new PositiveAction(),
+            negativeAction : new NegativeAction(),
+            footerCustomActions : new Button({text : "Footer Custom Action"}),
+            discussInJamAction : new DiscussInJamAction(),
+            saveAsTileAction : new Button({text : "Save as Tile Action"}),
+            shareInJamAction : new ShareInJamAction(),
+            sendMessageAction : new SendMessageAction(),
+            sendEmailAction : new SendEmailAction(),
+            printAction : new PrintAction(),
+            customShareActions : new Button({text : "Custom Share Action"}),
+            titleBreadcrumbs : new Breadcrumbs({
+                currentLocationText : "test",
+                links : [
+                    new Link({text: "link1"}),
+                    new Link({text: "link2"})
+                ]
+            })
+        })
+    }))
 	.then(function() {
 		var fnConfirmMoveExpandedContentOn3rdPosition = function (oAppComponent, oViewAfterAction, assert) {
 			assert.strictEqual( oViewAfterAction.byId("button1").getId(),                 // Id of element at first position in original view
@@ -222,23 +218,23 @@ sap.ui.define([
 			action : {
 				name : "move",
 				controlId : "semanticPage",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("button1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "titleExpandedContent",
-							parent: oView.byId("semanticPage")
-						},
-						target : {
-							aggregation: "titleExpandedContent",
-							parent: oView.byId("semanticPage")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("button1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "titleExpandedContent",
+                        parent: oView.byId("semanticPage")
+                    },
+
+                    target : {
+                        aggregation: "titleExpandedContent",
+                        parent: oView.byId("semanticPage")
+                    }
+                })
 			},
 			afterAction : fnConfirmMoveExpandedContentOn3rdPosition,
 			afterUndo : fnConfirmMoveExpandedContentOn1stPosition,
@@ -272,23 +268,23 @@ sap.ui.define([
 			action : {
 				name : "move",
 				controlId : "semanticPage",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("button1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "titleSnappedContent",
-							parent: oView.byId("semanticPage")
-						},
-						target : {
-							aggregation: "titleSnappedContent",
-							parent: oView.byId("semanticPage")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("button1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "titleSnappedContent",
+                        parent: oView.byId("semanticPage")
+                    },
+
+                    target : {
+                        aggregation: "titleSnappedContent",
+                        parent: oView.byId("semanticPage")
+                    }
+                })
 			},
 			afterAction : fnConfirmMoveCollapsedContentOn3rdPosition,
 			afterUndo : fnConfirmMoveCollapsedContentOn1stPosition,
@@ -322,23 +318,23 @@ sap.ui.define([
 			action : {
 				name : "move",
 				controlId : "semanticPage",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("button1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "titleContent",
-							parent: oView.byId("semanticPage")
-						},
-						target : {
-							aggregation: "titleContent",
-							parent: oView.byId("semanticPage")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("button1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "titleContent",
+                        parent: oView.byId("semanticPage")
+                    },
+
+                    target : {
+                        aggregation: "titleContent",
+                        parent: oView.byId("semanticPage")
+                    }
+                })
 			},
 			afterAction : fnConfirmMoveTitleContentOn3rdPosition,
 			afterUndo : fnConfirmMoveTitleContentOn1stPosition,
@@ -372,23 +368,23 @@ sap.ui.define([
 			action : {
 				name : "move",
 				controlId : "semanticPage",
-				parameter : function(oView){
-					return {
-						movedElements : [{
-							element : oView.byId("button1"),
-							sourceIndex : 0,
-							targetIndex : 2
-						}],
-						source : {
-							aggregation: "headerContent",
-							parent: oView.byId("semanticPage")
-						},
-						target : {
-							aggregation: "headerContent",
-							parent: oView.byId("semanticPage")
-						}
-					};
-				}
+				parameter : oView => ({
+                    movedElements : [{
+                        element : oView.byId("button1"),
+                        sourceIndex : 0,
+                        targetIndex : 2
+                    }],
+
+                    source : {
+                        aggregation: "headerContent",
+                        parent: oView.byId("semanticPage")
+                    },
+
+                    target : {
+                        aggregation: "headerContent",
+                        parent: oView.byId("semanticPage")
+                    }
+                })
 			},
 			afterAction : fnConfirmMoveHeaderContentOn3rdPosition,
 			afterUndo : fnConfirmMoveHeaderContentOn1stPosition,

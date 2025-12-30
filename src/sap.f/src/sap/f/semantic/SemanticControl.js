@@ -81,37 +81,21 @@ sap.ui.define([
 		return this._getControl().getAggregation(sAggregationName, oDefaultForCreation);
 	};
 
-	SemanticControl.prototype.indexOfAggregation = function (sAggregationName, oObject) {
-		return this._getControl().indexOfAggregation(sAggregationName, oObject);
-	};
+	SemanticControl.prototype.indexOfAggregation = (sAggregationName, oObject) => this._getControl().indexOfAggregation(sAggregationName, oObject);
 
-	SemanticControl.prototype.insertAggregation = function (sAggregationName, oObject, iIndex, bSuppressInvalidate) {
-		return this._getControl().insertAggregation(sAggregationName, oObject, iIndex, bSuppressInvalidate);
-	};
+	SemanticControl.prototype.insertAggregation = (sAggregationName, oObject, iIndex, bSuppressInvalidate) => this._getControl().insertAggregation(sAggregationName, oObject, iIndex, bSuppressInvalidate);
 
-	SemanticControl.prototype.addAggregation = function (sAggregationName, oObject, bSuppressInvalidate) {
-		return this._getControl().addAggregation(sAggregationName, oObject, bSuppressInvalidate);
-	};
+	SemanticControl.prototype.addAggregation = (sAggregationName, oObject, bSuppressInvalidate) => this._getControl().addAggregation(sAggregationName, oObject, bSuppressInvalidate);
 
-	SemanticControl.prototype.removeAggregation = function (sAggregationName, vObject, bSuppressInvalidate) {
-		return this._getControl().removeAggregation(sAggregationName, vObject, bSuppressInvalidate);
-	};
+	SemanticControl.prototype.removeAggregation = (sAggregationName, vObject, bSuppressInvalidate) => this._getControl().removeAggregation(sAggregationName, vObject, bSuppressInvalidate);
 
-	SemanticControl.prototype.removeAllAggregation = function (sAggregationName, bSuppressInvalidate) {
-		return this._getControl().removeAllAggregation(sAggregationName, bSuppressInvalidate);
-	};
+	SemanticControl.prototype.removeAllAggregation = (sAggregationName, bSuppressInvalidate) => this._getControl().removeAllAggregation(sAggregationName, bSuppressInvalidate);
 
-	SemanticControl.prototype.destroyAggregation = function (sAggregationName, bSuppressInvalidate) {
-		return this._getControl().destroyAggregation(sAggregationName, bSuppressInvalidate);
-	};
+	SemanticControl.prototype.destroyAggregation = (sAggregationName, bSuppressInvalidate) => this._getControl().destroyAggregation(sAggregationName, bSuppressInvalidate);
 
-	SemanticControl.prototype.bindAggregation = function (sName, oBindingInfo) {
-		return this._getControl().bindAggregation(sName, oBindingInfo);
-	};
+	SemanticControl.prototype.bindAggregation = (sName, oBindingInfo) => this._getControl().bindAggregation(sName, oBindingInfo);
 
-	SemanticControl.prototype.unbindAggregation = function (sName, bSuppressReset) {
-		return this._getControl().unbindAggregation(sName, bSuppressReset);
-	};
+	SemanticControl.prototype.unbindAggregation = (sName, bSuppressReset) => this._getControl().unbindAggregation(sName, bSuppressReset);
 
 	SemanticControl.prototype.clone = function (sIdSuffix, aLocalIds) {
 		var oClone = Element.prototype.clone.apply(this, arguments);
@@ -131,9 +115,7 @@ sap.ui.define([
 		return vResult;
 	};
 
-	SemanticControl.prototype.getDomRef = function(sSuffix) {
-		return this._getControl().getDomRef(sSuffix);
-	};
+	SemanticControl.prototype.getDomRef = sSuffix => this._getControl().getDomRef(sSuffix);
 
 	SemanticControl.prototype.addEventDelegate = function (oDelegate, oThis) {
 		jQuery.each(oDelegate, function(sEventType, fnCallback) {
@@ -156,9 +138,7 @@ sap.ui.define([
 		return this;
 	};
 
-	SemanticControl.prototype._getConfiguration = function () {
-		return SemanticConfiguration.getConfiguration(this.getMetadata().getName());
-	};
+	SemanticControl.prototype._getConfiguration = () => SemanticConfiguration.getConfiguration(this.getMetadata().getName());
 
 	/**
 	* Applies the property value according to the semantic logic.

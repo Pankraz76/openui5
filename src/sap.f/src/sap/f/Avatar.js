@@ -58,9 +58,7 @@ sap.ui.define([
 		renderer: AvatarRenderer
 	});
 
-	Avatar.prototype._getDefaultTooltip = function() {
-		return Library.getResourceBundleFor("sap.f").getText("AVATAR_TOOLTIP");
-	};
+	Avatar.prototype._getDefaultTooltip = () => Library.getResourceBundleFor("sap.f").getText("AVATAR_TOOLTIP");
 
 	return Avatar;
 });

@@ -52,11 +52,7 @@ sap.ui.define([
 	 * @returns {string} The accessibility text of the content.
 	 * @override
 	 */
-	GridListItem.prototype.getContentAnnouncement = function() {
-		return this.getContent().map(function (oContent) {
-			return ListItemBase.getAccessibilityText(oContent);
-		}).join(" ").trim();
-	};
+	GridListItem.prototype.getContentAnnouncement = () => this.getContent().map(oContent => ListItemBase.getAccessibilityText(oContent)).join(" ").trim();
 
 	return GridListItem;
 });

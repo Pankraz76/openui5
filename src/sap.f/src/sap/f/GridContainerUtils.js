@@ -10,13 +10,9 @@ sap.ui.define([
 
 	return {
 
-		findDropTargetsAbove: function (oGrid, oItem) {
-			return this._findDropTargets(oGrid, oItem, this._isAbove);
-		},
+		findDropTargetsAbove: (oGrid, oItem) => this._findDropTargets(oGrid, oItem, this._isAbove),
 
-		findDropTargetsBelow: function (oGrid, oItem) {
-			return this._findDropTargets(oGrid, oItem, this._isBelow);
-		},
+		findDropTargetsBelow: (oGrid, oItem) => this._findDropTargets(oGrid, oItem, this._isBelow),
 
 		/**
 		 * Returns the wrapper DomRef of a control.
@@ -49,12 +45,10 @@ sap.ui.define([
 			return this.getItemWrapper(oItem);
 		},
 
-		createConfig: function (oGrid, oItem) {
-			return {
-				grid: oGrid,
-				item: oItem
-			};
-		},
+		createConfig: (oGrid, oItem) => ({
+            grid: oGrid,
+            item: oItem
+        }),
 
 		/**
 		 * Searches for the closest item to the given one
@@ -67,27 +61,21 @@ sap.ui.define([
 		_findDropTargets: function (oGrid, oItem, fnMatch) {
 			var aTargets = [],
 				oItemWrapper = this.getItemWrapper(oItem),
-				aCurrGridMatchingItems = oGrid.getItems().filter(function (a) {
-					return fnMatch(oItemWrapper, this.getItemWrapper(a));
-				}.bind(this)),
+				aCurrGridMatchingItems = oGrid.getItems().filter((a => fnMatch(oItemWrapper, this.getItemWrapper(a))).bind(this)),
 				oCurrGridMatch = this.createConfig(oGrid, this._findClosest(oItem, aCurrGridMatchingItems), oItem, fnMatch);
 
 			if (oCurrGridMatch.item) {
 				aTargets.push(oCurrGridMatch);
 			} else {
 				aTargets = Array.from(document.querySelectorAll(".sapFGridContainer"))
-					.filter(function (a) {
-						return fnMatch(oItemWrapper, a);
-					})
+					.filter(a => fnMatch(oItemWrapper, a))
 					.map(function (oGrid) {
 						var oNextGrid = Element.closestTo(oGrid);
 						var oCfg = this.createConfig(oNextGrid, this._findClosest(oItem, oNextGrid.getItems()), oItem, fnMatch);
 						oCfg.distFromItemToGrid = this._getDistance(oItem, oNextGrid, fnMatch);
 						return oCfg;
 					}.bind(this))
-					.sort(function (a, b) {
-						return a.distFromItemToGrid - b.distFromItemToGrid;
-					});
+					.sort((a, b) => a.distFromItemToGrid - b.distFromItemToGrid);
 			}
 
 			return aTargets;

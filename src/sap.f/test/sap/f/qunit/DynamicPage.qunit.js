@@ -1664,9 +1664,7 @@ function(
 	QUnit.test("DynamicPage header resize", function (assert) {
 		var oHeader = this.oDynamicPage.getHeader(),
 			$oDynamicPage,
-			isHeaderSnappedWithScroll = function () {
-				return this.oDynamicPage._getScrollPosition() >= this.oDynamicPage._getSnappingHeight();
-			}.bind(this),
+			isHeaderSnappedWithScroll = (() => this.oDynamicPage._getScrollPosition() >= this.oDynamicPage._getSnappingHeight()).bind(this),
 			oScrollPositionSpy;
 
 		oHeader.addContent(new Panel({height: "100px"}));
@@ -2607,12 +2605,10 @@ function(
 			scrollHeight: iScrollHeight,
 			// the browser returns a ceiled value for <code>clientHeight</code>
 			clientHeight: iScrollHeight - 1,
-			getBoundingClientRect: function() {
-				return {
-					// the actual height is only a fraction of a pixel smaller than the scrollHeight
-					height: (iScrollHeight - 0.1)
-				};
-			}
+			getBoundingClientRect: () => ({
+                // the actual height is only a fraction of a pixel smaller than the scrollHeight
+                height: (iScrollHeight - 0.1)
+            })
 		};
 
 		// Assert
@@ -2640,12 +2636,10 @@ function(
 			scrollHeight: iScrollHeight,
 			// the browser returns a ceiled value for <code>clientHeight</code>
 			clientHeight: iScrollHeight,
-			getBoundingClientRect: function() {
-				return {
-					// the actual height is smaller than the scrollHeight
-					height: (iScrollHeight - 1.1)
-				};
-			}
+			getBoundingClientRect: () => ({
+                // the actual height is smaller than the scrollHeight
+                height: (iScrollHeight - 1.1)
+            })
 		};
 
 		// Assert
@@ -3452,9 +3446,7 @@ function(
 							}
 						}
 					},
-					createContent : function() {
-						return oView;
-					}
+					createContent : () => oView
 				});
 
 				this.oUiComponent = new Comp("comp");
@@ -3550,9 +3542,7 @@ function(
 							}
 						}
 					},
-					createContent : function() {
-						return oView;
-					}
+					createContent : () => oView
 				});
 
 				this.oUiComponent = new Comp("comp");

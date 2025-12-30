@@ -30,27 +30,27 @@ sap.ui.define([
 		action: {
 			name: "move",
 			controlId: "myGC",
-			parameter: function (oView) {
-				return {
-					movedElements: [{
-						element: oView.byId("item1"),
-						sourceIndex: 0,
-						targetIndex: 2
-					}],
-					source: {
-						aggregation: "items",
-						parent: oView.byId("myGC"),
-						publicAggregation: "items",
-						publicParent: oView.byId("myGC")
-					},
-					target: {
-						aggregation: "items",
-						parent: oView.byId("myGC"),
-						publicAggregation: "items",
-						publicParent: oView.byId("myGC")
-					}
-				};
-			}
+			parameter: oView => ({
+                movedElements: [{
+                    element: oView.byId("item1"),
+                    sourceIndex: 0,
+                    targetIndex: 2
+                }],
+
+                source: {
+                    aggregation: "items",
+                    parent: oView.byId("myGC"),
+                    publicAggregation: "items",
+                    publicParent: oView.byId("myGC")
+                },
+
+                target: {
+                    aggregation: "items",
+                    parent: oView.byId("myGC"),
+                    publicAggregation: "items",
+                    publicParent: oView.byId("myGC")
+                }
+            })
 		},
 		afterAction: fnConfirmItemIsOn3rdPosition,
 		afterUndo: fnConfirmItemIsOn1rdPosition,

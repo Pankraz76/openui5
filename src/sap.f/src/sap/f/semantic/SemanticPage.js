@@ -631,9 +631,7 @@ sap.ui.define([
 		this._bSPBeingDestroyed = false;
 		this._initDynamicPage();
 		this._attachShareMenuButtonChange();
-		this._fnActionSubstituteParentFunction = function () {
-			return this;
-		}.bind(this);
+		this._fnActionSubstituteParentFunction = (() => this).bind(this);
 	};
 
 	SemanticPage.prototype.exit = function () {
@@ -652,11 +650,7 @@ sap.ui.define([
 		return this;
 	};
 
-	SemanticPage.prototype.getHeaderExpanded = function () {
-		// We must override the getter,
-		// because <code>DynamicPage</code> mutates the <code>headerExpanded</code> internally.
-		return this._getPage().getHeaderExpanded();
-	};
+	SemanticPage.prototype.getHeaderExpanded = () => this._getPage().getHeaderExpanded();
 
 	SemanticPage.prototype.setHeaderPinnable = function (bHeaderPinnable) {
 		var oDynamicPage = this._getPage(),
@@ -765,9 +759,7 @@ sap.ui.define([
 			}
 
 			if (oObject) {
-				oObject._getType = function() {
-					return sType;
-				};
+				oObject._getType = () => sType;
 				this._getSemanticContainer(sPlacement).addContent(oObject, sPlacement);
 				this._onAddAggregation(oObject, sType);
 			}
@@ -1185,19 +1177,15 @@ sap.ui.define([
 			oActionToBeMoved;
 
 		if (aVisibleActions.length === 1) {
-			oActionToBeMoved = aAllShareMenuActions.filter(function (oAction) {
-				return (oAction._getControl && oAction._getControl() === aVisibleActions[0])
-						|| oAction === aVisibleActions[0];
-			})[0];
+			oActionToBeMoved = aAllShareMenuActions.filter(oAction => (oAction._getControl && oAction._getControl() === aVisibleActions[0])
+                    || oAction === aVisibleActions[0])[0];
 
 			// Clean action sheet CSS class
 			var oActionCtrl = oActionToBeMoved._getControl && oActionToBeMoved._getControl();
 			if (oActionCtrl) {
 				var AC_CLASS_PREFIX = "sapMActionSheet";
 				oActionCtrl.aCustomStyleClasses
-					.filter(function (sStyleClass) {
-						return sStyleClass.indexOf(AC_CLASS_PREFIX) > -1;
-					})
+					.filter(sStyleClass => sStyleClass.indexOf(AC_CLASS_PREFIX) > -1)
 					.forEach(function (sACStyleClass) {
 						oActionCtrl.removeStyleClass(sACStyleClass);
 					});

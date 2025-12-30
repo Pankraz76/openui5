@@ -37,9 +37,7 @@ sap.ui.define([
 
 			const aMatrix = Array.from(
 				new Array(oLayoutSizes.rows.length),
-				function () {
-					return new Array(oLayoutSizes.columns.length).fill(this.EMPTY_CELL);
-				}.bind(this)
+				(() => new Array(oLayoutSizes.columns.length).fill(this.EMPTY_CELL)).bind(this)
 			);
 
 			aItemsDomRefs.forEach(function (oItemDomRef) {

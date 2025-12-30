@@ -69,18 +69,14 @@ sap.ui.define(['sap/ui/core/routing/Router', './TargetHandler', './Targets'],
 			 * @return {sap.f.routing.TargetHandler} The <code>TargetHandler</code> instance
 			 * @public
 			 */
-			getTargetHandler : function () {
-				return this._oTargetHandler;
-			},
+			getTargetHandler : () => this._oTargetHandler,
 
-			_createTargets : function (oConfig, oTargetsConfig) {
-				return new Targets({
-					views: this._oViews,
-					config: oConfig,
-					targets: oTargetsConfig,
-					targetHandler: this._oTargetHandler
-				});
-			},
+			_createTargets : (oConfig, oTargetsConfig) => new Targets({
+                views: this._oViews,
+                config: oConfig,
+                targets: oTargetsConfig,
+                targetHandler: this._oTargetHandler
+            }),
 
 			fireRouteMatched : function (mArguments) {
 				var oRoute = this.getRoute(mArguments.name),

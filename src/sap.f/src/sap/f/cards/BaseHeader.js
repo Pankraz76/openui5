@@ -240,34 +240,26 @@ sap.ui.define([
 		});
 	};
 
-	BaseHeader.prototype.getFocusDomRef = function () {
-		return this.getDomRef("focusable");
-	};
+	BaseHeader.prototype.getFocusDomRef = () => this.getDomRef("focusable");
 
 	/**
 	 * Gets the id of the title element. Can be used for aria-labelledby.
 	 * @ui5-restricted sap.ui.integration
 	 * @returns {string} The id of the title element.
 	 */
-	BaseHeader.prototype.getTitleId = function () {
-		return null; // must override in Header and NumericHeader
-	};
+	BaseHeader.prototype.getTitleId = () => null;
 
 	/**
 	 * If the header must be rendered as <code>a</code> element.
 	 * @returns {boolean} True if the header must be rendered as <code>a</code> element.
 	 */
-	BaseHeader.prototype.isLink = function () {
-		return !!this.getHref();
-	};
+	BaseHeader.prototype.isLink = () => !!this.getHref();
 
 	/**
 	 * If the header must have tile accessibility.
 	 * @returns {boolean} True if card related attributes should not be rendered.
 	 */
-	BaseHeader.prototype.isTile = function () {
-		return !!this.getProperty("useTileLayout");
-	};
+	BaseHeader.prototype.isTile = () => !!this.getProperty("useTileLayout");
 
 	BaseHeader.prototype.onkeydown = function (oEvent) {
 
@@ -469,9 +461,7 @@ sap.ui.define([
 	/**
 	 * @ui5-restricted
 	 */
-	BaseHeader.prototype.getTitleAriaRole = function () {
-		return "heading";
-	};
+	BaseHeader.prototype.getTitleAriaRole = () => "heading";
 
 	/**
 	 * @ui5-restricted
@@ -487,9 +477,7 @@ sap.ui.define([
 	/**
 	 * @ui5-restricted
 	 */
-	BaseHeader.prototype.getAriaHeadingLevel = function () {
-		return this.getProperty("headingLevel");
-	};
+	BaseHeader.prototype.getAriaHeadingLevel = () => this.getProperty("headingLevel");
 
 	/**
 	 * @ui5-restricted
@@ -507,15 +495,11 @@ sap.ui.define([
 	 * Gets the ids of the banner lines to be used in aria-labelledby
 	 * @returns {string} The ids of the banner lines.
 	 */
-	BaseHeader.prototype._getBannerLinesIds = function () {
-		return this.getBannerLines().map((oBannerLine) => {
-			return oBannerLine.getId();
-		}).join(" ");
-	};
+	BaseHeader.prototype._getBannerLinesIds = () => this.getBannerLines().map((oBannerLine) => {
+        return oBannerLine.getId();
+    }).join(" ");
 
-	BaseHeader.prototype.isInteractive = function() {
-		return this.hasListeners("press");
-	};
+	BaseHeader.prototype.isInteractive = () => this.hasListeners("press");
 
 	BaseHeader.prototype.isFocusable = function() {
 		if (!this.getProperty("focusable")) {
@@ -548,9 +532,7 @@ sap.ui.define([
 		}
 	};
 
-	BaseHeader.prototype._hasModifierKeys = function (oEvent) {
-		return oEvent.altKey || oEvent.ctrlKey || oEvent.metaKey;
-	};
+	BaseHeader.prototype._hasModifierKeys = oEvent => oEvent.altKey || oEvent.ctrlKey || oEvent.metaKey;
 
 	return BaseHeader;
 });

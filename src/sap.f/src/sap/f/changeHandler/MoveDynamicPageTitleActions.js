@@ -144,9 +144,7 @@ sap.ui.define([
 					setTargetIndex: function(oChange, iNewTargetIndex) {
 						oChange.getContent().movedElements[0].targetIndex = iNewTargetIndex;
 					},
-					getTargetIndex: function(oChange) {
-						return oChange.getContent().movedElements[0].targetIndex;
-					},
+					getTargetIndex: oChange => oChange.getContent().movedElements[0].targetIndex,
 					setIndexInRevertData: function(oChange, iIndex) {
 						var oRevertData = oChange.getRevertData();
 						oRevertData.index = iIndex;

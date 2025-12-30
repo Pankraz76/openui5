@@ -33,9 +33,7 @@ sap.ui.define([
 			this._oContainer = oContainer;
 			this._oParent = oParent;
 		},
-		getInterface: function() {
-			return this; // no facade
-		}
+		getInterface: () => this
 	});
 
 	/**
@@ -43,18 +41,14 @@ sap.ui.define([
 	*
 	* @returns {sap.ui.core.Control}
 	*/
-	SemanticContainer.prototype._getContainer = function() {
-		return this._oContainer;
-	};
+	SemanticContainer.prototype._getContainer = () => this._oContainer;
 
 	/**
 	 * Returns the parent control.
 	 *
 	 * @returns {sap.ui.core.Control}
 	 */
-	SemanticContainer.prototype._getParent = function() {
-		return this._oParent;
-	};
+	SemanticContainer.prototype._getParent = () => this._oParent;
 
 	/**
 	 * Returns the shouldBePreprocessed state of a <code>SemanticControl</code>,
@@ -90,9 +84,7 @@ sap.ui.define([
 	* @param {sap.f.semantic.SemanticControl | sap.m.Button} oControl
 	* @returns {string}
 	*/
-	SemanticContainer.prototype._getConstraints = function(oControl) {
-		return SemanticConfiguration.getConstraints(oControl.getMetadata().getName());
-	};
+	SemanticContainer.prototype._getConstraints = oControl => SemanticConfiguration.getConstraints(oControl.getMetadata().getName());
 
 	/**
 	* Returns the internal control of a <code>SemanticControl</code> instance.
@@ -103,18 +95,14 @@ sap.ui.define([
 	* @param {sap.f.semantic.SemanticControl | sap.m.Button} oControl
 	* @returns {sap.f.semantic.SemanticControl | sap.m.Button}
 	*/
-	SemanticContainer.prototype._getControl = function(oControl) {
-		return oControl._getControl ? oControl._getControl() : oControl;
-	};
+	SemanticContainer.prototype._getControl = oControl => oControl._getControl ? oControl._getControl() : oControl;
 
 	/**
 	* Determines if the <code>SemanticControl</code> is a <code>sap.f.semantic.MainAction</code>.
 	*
 	* @returns {boolean}
 	*/
-	SemanticContainer.prototype._isMainAction = function(oControl) {
-		return SemanticConfiguration.isMainAction(oControl.getMetadata().getName());
-	};
+	SemanticContainer.prototype._isMainAction = oControl => SemanticConfiguration.isMainAction(oControl.getMetadata().getName());
 
 	/**
 	* Determines if the <code>SemanticControl</code> is a <code>Navigation</code> action,
@@ -122,9 +110,7 @@ sap.ui.define([
 	*
 	* @returns {boolean}
 	*/
-	SemanticContainer.prototype._isNavigationAction = function(oControl) {
-		return SemanticConfiguration.isNavigationAction(oControl.getMetadata().getName());
-	};
+	SemanticContainer.prototype._isNavigationAction = oControl => SemanticConfiguration.isNavigationAction(oControl.getMetadata().getName());
 
 	/**
 	* Calls container`s method.
@@ -132,9 +118,7 @@ sap.ui.define([
 	* @param {string} sMethod the method to be called
 	* @returns {Object | Array<T>}
 	*/
-	SemanticContainer.prototype._callContainerAggregationMethod = function(sMethod) {
-		return this._getContainer()[sMethod].apply(this._getContainer(), Array.prototype.slice.call(arguments).slice(1));
-	};
+	SemanticContainer.prototype._callContainerAggregationMethod = sMethod => this._getContainer()[sMethod].apply(this._getContainer(), Array.prototype.slice.call(arguments).slice(1));
 
 	/**
 	* Sorts the <code>SemanticControl</code> instances by the order
@@ -144,9 +128,7 @@ sap.ui.define([
 	* @param {sap.f.semantic.SemanticControl} oControlB
 	* @returns {int}
 	*/
-	SemanticContainer.prototype._sortControlByOrder = function(oControlA, oControlB) {
-		return this._getControlOrder(oControlA) - this._getControlOrder(oControlB);
-	};
+	SemanticContainer.prototype._sortControlByOrder = (oControlA, oControlB) => this._getControlOrder(oControlA) - this._getControlOrder(oControlB);
 
 	SemanticContainer.prototype.destroy = function() {
 		this._oParent = null;

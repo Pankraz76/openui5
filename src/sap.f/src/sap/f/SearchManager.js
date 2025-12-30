@@ -212,9 +212,7 @@ sap.ui.define(['sap/ui/core/Element', 'sap/ui/base/ManagedObjectObserver', './sh
 			this._getSearchField().suggest(bShow);
 		};
 
-		SearchManager.prototype._getSearchField = function () {
-			return this._oSearch._getSearchField();
-		};
+		SearchManager.prototype._getSearchField = () => this._oSearch._getSearchField();
 
 		return SearchManager;
 	});

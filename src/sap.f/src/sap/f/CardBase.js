@@ -198,9 +198,7 @@ sap.ui.define([
 	 * @private
 	 * @returns {sap.f.cards.IHeader} The header of the card.
 	 */
-	CardBase.prototype.getCardHeader = function () {
-		return null;
-	};
+	CardBase.prototype.getCardHeader = () => null;
 
 	/**
 	 * Implements sap.f.ICard interface.
@@ -210,9 +208,7 @@ sap.ui.define([
 	 * @returns {sap.f.cards.HeaderPosition} The position of the header of the card.
 	 * @since 1.65
 	 */
-	CardBase.prototype.getCardHeaderPosition = function () {
-		return null;
-	};
+	CardBase.prototype.getCardHeaderPosition = () => null;
 
 	/**
 	 * Implements sap.f.ICard interface.
@@ -221,9 +217,7 @@ sap.ui.define([
 	 * @private
 	 * @returns {sap.ui.core.Control} The content of the card.
 	 */
-	CardBase.prototype.getCardContent = function () {
-		return null;
-	};
+	CardBase.prototype.getCardContent = () => null;
 
 	/**
 	 * Returns the DOM Element that should get the focus.
@@ -243,9 +237,7 @@ sap.ui.define([
 	 * @private
 	 * @returns {sap.f.cards.IHeader} The header of the card.
 	 */
-	CardBase.prototype._getHeaderAggregation = function () {
-		return this.getCardHeader();
-	};
+	CardBase.prototype._getHeaderAggregation = () => this.getCardHeader();
 
 	CardBase.prototype.onmousedown = function () {
 		this._hideBadge();
@@ -313,9 +305,7 @@ sap.ui.define([
 	 * @ui5-restricted sap.f
 	 * @returns {boolean} hook to determine if the card is a tile variant
 	 */
-	CardBase.prototype.isTileDisplayVariant = function () {
-		return false;
-	};
+	CardBase.prototype.isTileDisplayVariant = () => false;
 
 	CardBase.prototype._getAriaDescribedByIds = function () {
 		const bHasCardBadgeCustomData = this._getCardBadgeCustomData().length > 0;
@@ -481,9 +471,7 @@ sap.ui.define([
 	 * @ui5-restricted sap.f.CardRenderer
 	 * @returns {boolean} False if the card should not be fully interactive with the mouse.
 	 */
-	CardBase.prototype.isMouseInteractionDisabled = function() {
-		return false;
-	};
+	CardBase.prototype.isMouseInteractionDisabled = () => false;
 
 	/**
 	 * Sets the accessibility role for the <code>sap.f.GridContainer</code> item.
@@ -505,13 +493,9 @@ sap.ui.define([
 	 * @returns {string} The accessibility role for the <code>sap.f.GridContainer</code> item
 	 * @public
 	 */
-	CardBase.prototype.getGridItemRole = function () {
-		return this._sGridItemRole;
-	};
+	CardBase.prototype.getGridItemRole = () => this._sGridItemRole;
 
-	CardBase.prototype.isRoleListItem = function () {
-		return (this.getSemanticRole() === SemanticRole.ListItem) || this.getGridItemRole();
-	};
+	CardBase.prototype.isRoleListItem = () => (this.getSemanticRole() === SemanticRole.ListItem) || this.getGridItemRole();
 
 	return CardBase;
 });

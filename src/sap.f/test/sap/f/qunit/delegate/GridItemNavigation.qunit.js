@@ -101,17 +101,13 @@ sap.ui.define([
 			this.oItemNavigation = new GridItemNavigation();
 			this.oItemNavigation.setRootDomRef(this.$grid[0]);
 			this.oItemNavigation.setItemDomRefs(this.$grid.children().get());
-			this.stub(this.oItemNavigation, "_getGridInstance").callsFake(function () {
-				return {
-					getNavigationMatrix: function () {
-						return GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
-							gap: 8,
-							columns: this.$grid.css("gridTemplateColumns").split(/\s+/),
-							rows: this.$grid.css("gridTemplateRows").split(/\s+/)
-						});
-					}.bind(this)
-				};
-			}.bind(this));
+			this.stub(this.oItemNavigation, "_getGridInstance").callsFake((() => ({
+                getNavigationMatrix: (() => GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
+                    gap: 8,
+                    columns: this.$grid.css("gridTemplateColumns").split(/\s+/),
+                    rows: this.$grid.css("gridTemplateRows").split(/\s+/)
+                })).bind(this)
+            })).bind(this));
 		},
 		afterEach: function () {
 			this.$grid.detach();
@@ -147,13 +143,9 @@ sap.ui.define([
 			this.$grid.appendTo("#" + DOM_RENDER_LOCATION);
 			this.oItemNavigation = new GridItemNavigation();
 			this.oItemNavigation.setRootDomRef(this.$grid[0]);
-			this.stub(this.oItemNavigation, "_getGridInstance").callsFake(function () {
-				return {
-					getNavigationMatrix: function () {
-						return null;
-					}
-				};
-			});
+			this.stub(this.oItemNavigation, "_getGridInstance").callsFake(() => ({
+                getNavigationMatrix: () => null
+            }));
 		},
 		afterEach: function () {
 			this.$grid.detach();
@@ -191,14 +183,10 @@ sap.ui.define([
 			this.oItemNavigation.setRootDomRef(this.$grid[0]);
 			this.oItemNavigation.setItemDomRefs(this.$grid.children().get());
 			this.oBorderReachedSpy = this.spy();
-			this.stub(this.oItemNavigation, "_getGridInstance").callsFake(function () {
-				return {
-					getNavigationMatrix: function () {
-						return this.oNavigationMatrix;
-					}.bind(this),
-					onItemNavigationBorderReached: this.oBorderReachedSpy
-				};
-			}.bind(this));
+			this.stub(this.oItemNavigation, "_getGridInstance").callsFake((() => ({
+                getNavigationMatrix: (() => this.oNavigationMatrix).bind(this),
+                onItemNavigationBorderReached: this.oBorderReachedSpy
+            })).bind(this));
 		},
 		afterEach: function () {
 			this.$grid.detach();
@@ -424,13 +412,11 @@ sap.ui.define([
 	QUnit.test("DOWN direction. Search column when there are no rows", function (assert) {
 		// arrange
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
-					gap: 8,
-					columns: [],
-					rows: [] // no rows
-				});
-			}.bind(this)
+			getNavigationMatrix: (() => GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
+                gap: 8,
+                columns: [],
+                rows: [] // no rows
+            })).bind(this)
 		};
 
 		// act
@@ -443,13 +429,11 @@ sap.ui.define([
 	QUnit.test("DOWN direction. Search column out of range", function (assert) {
 		// arrange
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
-					gap: 8,
-					columns: [], // no columns
-					rows: ["120px"]
-				});
-			}.bind(this)
+			getNavigationMatrix: (() => GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
+                gap: 8,
+                columns: [], // no columns
+                rows: ["120px"]
+            })).bind(this)
 		};
 		const iOutOfRange = 100000;
 
@@ -463,13 +447,11 @@ sap.ui.define([
 	QUnit.test("UP direction. Search column when there are no rows", function (assert) {
 		// arrange
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
-					gap: 8,
-					columns: [],
-					rows: [] // no rows
-				});
-			}.bind(this)
+			getNavigationMatrix: (() => GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
+                gap: 8,
+                columns: [],
+                rows: [] // no rows
+            })).bind(this)
 		};
 
 		// act
@@ -482,13 +464,11 @@ sap.ui.define([
 	QUnit.test("UP direction. Search column out of range", function (assert) {
 		// arrange
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
-					gap: 8,
-					columns: [], // no columns
-					rows: ["120px"]
-				});
-			}.bind(this)
+			getNavigationMatrix: (() => GridNavigationMatrix.create(this.$grid[0], this.$grid.children().get(), {
+                gap: 8,
+                columns: [], // no columns
+                rows: ["120px"]
+            })).bind(this)
 		};
 		const iOutOfRange = 0;
 
@@ -503,12 +483,10 @@ sap.ui.define([
 		// arrange
 		const oFakeItem = document.createElement("div");
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return [
-					[oFakeItem],
-					[EMPTY_CELL]
-				];
-			}
+			getNavigationMatrix: () => [
+                [oFakeItem],
+                [EMPTY_CELL]
+            ]
 		};
 
 		// act
@@ -522,15 +500,13 @@ sap.ui.define([
 		// arrange
 		const oFakeItem = document.createElement("div");
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return [
-					[EMPTY_CELL],
-					[EMPTY_CELL],
-					[EMPTY_CELL],
-					[oFakeItem],
-					[EMPTY_CELL]
-				];
-			}
+			getNavigationMatrix: () => [
+                [EMPTY_CELL],
+                [EMPTY_CELL],
+                [EMPTY_CELL],
+                [oFakeItem],
+                [EMPTY_CELL]
+            ]
 		};
 
 		// act
@@ -544,12 +520,10 @@ sap.ui.define([
 		// arrange
 		const oFakeItem = document.createElement("div");
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return [
-					[EMPTY_CELL],
-					[oFakeItem]
-				];
-			}
+			getNavigationMatrix: () => [
+                [EMPTY_CELL],
+                [oFakeItem]
+            ]
 		};
 
 		// act
@@ -563,15 +537,13 @@ sap.ui.define([
 		// arrange
 		const oFakeItem = document.createElement("div");
 		const oFakeGrid = {
-			getNavigationMatrix: function () {
-				return [
-					[EMPTY_CELL],
-					[oFakeItem],
-					[oFakeItem],
-					[EMPTY_CELL],
-					[EMPTY_CELL]
-				];
-			}
+			getNavigationMatrix: () => [
+                [EMPTY_CELL],
+                [oFakeItem],
+                [oFakeItem],
+                [EMPTY_CELL],
+                [EMPTY_CELL]
+            ]
 		};
 
 		// act

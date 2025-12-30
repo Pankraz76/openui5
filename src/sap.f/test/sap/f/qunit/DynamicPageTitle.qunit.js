@@ -582,12 +582,10 @@ function (
 		assert.strictEqual($title.hasClass("sapFDynamicPageTitleFocus"), true, "focus class is added");
 
 		// Act
-		oStub = this.stub(oDynamicPageTitle, "_getFocusSpan").callsFake(function() {
-			return {
-				is: function() { return true; },
-				show: function () {}
-			};
-		});
+		oStub = this.stub(oDynamicPageTitle, "_getFocusSpan").callsFake(() => ({
+            is: () => true,
+            show: function () {}
+        }));
 		oDynamicPage.invalidate();
 		Core.applyChanges();
 

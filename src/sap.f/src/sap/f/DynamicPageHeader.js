@@ -118,9 +118,7 @@ sap.ui.define([
 		 * Retrieves the resource bundle for the <code>sap.f</code> library.
 		 * @returns {Object} the resource bundle object
 		 */
-		DynamicPageHeader._getResourceBundle = function () {
-			return Library.getResourceBundleFor("sap.f");
-		};
+		DynamicPageHeader._getResourceBundle = () => Library.getResourceBundleFor("sap.f");
 
 		DynamicPageHeader.UNPRESSED_PIN_ICON = "sap-icon://pushpin-off";
 
@@ -318,9 +316,7 @@ sap.ui.define([
 		 * @returns {boolean}
 		 * @private
 		 */
-		DynamicPageHeader.prototype._getShowCollapseButton = function () {
-			return this._bShowCollapseButton && !!this.getContent().length;
-		};
+		DynamicPageHeader.prototype._getShowCollapseButton = () => this._bShowCollapseButton && !!this.getContent().length;
 
 		/**
 		 * Sets the private <code>_bShowCollapseButton</code> property.
@@ -354,9 +350,7 @@ sap.ui.define([
 		 * @return {jQuery}
 		 * @private
 		 */
-		DynamicPageHeader.prototype._getPinButtonJQueryRef = function () {
-			return this._getPinButton().$();
-		};
+		DynamicPageHeader.prototype._getPinButtonJQueryRef = () => this._getPinButton().$();
 
 		/**
 		* Determines the <code>DynamicPageHeader</code> state.

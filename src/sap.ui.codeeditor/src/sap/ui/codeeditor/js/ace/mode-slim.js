@@ -1072,7 +1072,12 @@ var Tag = function () {
     this.end = { row: 0, column: 0 };
 };
 function is(token, type) {
-    return token.type.lastIndexOf(type + ".xml") > -1;
+    // ##### BEGIN MODIFIED BY SAP
+    // Backport of ajaxorg/ace#5752 (fixed in Ace 1.39.1): guard against undefined tokens, e.g. a
+    // trailing "</" without tag name, see https://github.com/UI5/openui5/issues/4474
+    return token && token.type && token.type.lastIndexOf(type + ".xml") > -1;
+    // return token.type.lastIndexOf(type + ".xml") > -1;
+    // ##### END MODIFIED BY SAP
 }
 (function () {
     this.getFoldWidget = function (session, foldStyle, row) {
